@@ -1,0 +1,3352 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+<title>Digitale Solution POS</title>
+<meta name="description" content="POS temps réel multi-appareils — Firebase SaaS pour commerçants africains"/>
+<meta name="theme-color" content="#FF6B00"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="DS POS"/>
+<link rel="manifest" href="manifest.json"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+<style>
+/* ════════════════════════════════════════════════════════════════
+   DIGITALE SOLUTION — DESIGN SYSTEM
+   Thèmes: dark · light · neon · ocean
+   Contraste WCAG AAA sur tous les thèmes
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── DARK (défaut) ─ fond charbon, texte crème, orange vif ── */
+:root, [data-theme="dark"] {
+  --bg:       #0C0B0A;
+  --bg2:      #161412;
+  --surf:     #1C1A18;
+  --surf2:    #242220;
+  --surf3:    #2C2A27;
+  --bdr:      rgba(255,255,255,0.06);
+  --bdr2:     rgba(255,255,255,0.12);
+  --acc:      #FF6B00;
+  --acc-d:    #CC5500;
+  --acc-l:    #FF8C33;
+  --acc-glow: rgba(255,107,0,0.20);
+  --txt:      #F2EDE6;
+  --txt2:     #A09880;
+  --txt3:     #605850;
+  --ok:       #2ECC71;
+  --warn:     #F39C12;
+  --err:      #E74C3C;
+  --ok-bg:    rgba(46,204,113,0.10);
+  --warn-bg:  rgba(243,156,18,0.10);
+  --err-bg:   rgba(231,76,60,0.10);
+  --shadow:   0 4px 24px rgba(0,0,0,0.50);
+  --shadow-a: 0 4px 32px rgba(255,107,0,0.25);
+  --topbar:   rgba(12,11,10,0.94);
+  --card-sh:  0 2px 16px rgba(0,0,0,0.40);
+  --inv:      0; /* pour filtres inversion */
+}
+
+/* ── LIGHT ─ blanc pur, texte très sombre, orange profond ── */
+[data-theme="light"] {
+  --bg:       #F7F5F2;
+  --bg2:      #FFFFFF;
+  --surf:     #FFFFFF;
+  --surf2:    #F0EDE8;
+  --surf3:    #E8E4DE;
+  --bdr:      rgba(0,0,0,0.08);
+  --bdr2:     rgba(0,0,0,0.15);
+  --acc:      #E05500;
+  --acc-d:    #B84400;
+  --acc-l:    #FF6B00;
+  --acc-glow: rgba(224,85,0,0.15);
+  --txt:      #111008;
+  --txt2:     #5A5040;
+  --txt3:     #9A9080;
+  --ok:       #1A9E50;
+  --warn:     #C47A00;
+  --err:      #C0392B;
+  --ok-bg:    rgba(26,158,80,0.09);
+  --warn-bg:  rgba(196,122,0,0.09);
+  --err-bg:   rgba(192,57,43,0.09);
+  --shadow:   0 4px 20px rgba(0,0,0,0.10);
+  --shadow-a: 0 4px 24px rgba(224,85,0,0.18);
+  --topbar:   rgba(247,245,242,0.96);
+  --card-sh:  0 2px 12px rgba(0,0,0,0.08);
+  --inv:      1;
+}
+
+/* ── NEON ─ noir absolu, vert plasma, texte blanc pur ── */
+[data-theme="neon"] {
+  --bg:       #000000;
+  --bg2:      #080808;
+  --surf:     #0C0C0C;
+  --surf2:    #131313;
+  --surf3:    #1A1A1A;
+  --bdr:      rgba(0,255,148,0.10);
+  --bdr2:     rgba(0,255,148,0.22);
+  --acc:      #00FF94;
+  --acc-d:    #00CC76;
+  --acc-l:    #80FFCA;
+  --acc-glow: rgba(0,255,148,0.22);
+  --txt:      #FFFFFF;
+  --txt2:     #70A090;
+  --txt3:     #2A4A3A;
+  --ok:       #00FF94;
+  --warn:     #FFD700;
+  --err:      #FF3355;
+  --ok-bg:    rgba(0,255,148,0.08);
+  --warn-bg:  rgba(255,215,0,0.08);
+  --err-bg:   rgba(255,51,85,0.08);
+  --shadow:   0 4px 32px rgba(0,0,0,0.80);
+  --shadow-a: 0 0 32px rgba(0,255,148,0.20);
+  --topbar:   rgba(0,0,0,0.97);
+  --card-sh:  0 0 24px rgba(0,255,148,0.06);
+  --inv:      0;
+}
+
+/* ── OCEAN ─ bleu abyssal, cyan électrique ── */
+[data-theme="ocean"] {
+  --bg:       #020D1A;
+  --bg2:      #051828;
+  --surf:     #071E30;
+  --surf2:    #0C2840;
+  --surf3:    #103250;
+  --bdr:      rgba(56,189,248,0.10);
+  --bdr2:     rgba(56,189,248,0.22);
+  --acc:      #38BDF8;
+  --acc-d:    #0284C7;
+  --acc-l:    #7DD3FC;
+  --acc-glow: rgba(56,189,248,0.20);
+  --txt:      #E0F2FE;
+  --txt2:     #4A8090;
+  --txt3:     #1A4060;
+  --ok:       #34D399;
+  --warn:     #FBBF24;
+  --err:      #F87171;
+  --ok-bg:    rgba(52,211,153,0.09);
+  --warn-bg:  rgba(251,191,36,0.09);
+  --err-bg:   rgba(248,113,113,0.09);
+  --shadow:   0 4px 32px rgba(0,0,0,0.60);
+  --shadow-a: 0 4px 32px rgba(56,189,248,0.20);
+  --topbar:   rgba(2,13,26,0.96);
+  --card-sh:  0 0 20px rgba(56,189,248,0.05);
+  --inv:      0;
+}
+
+/* ── COMMUNS ─────────────────────────────────────────────── */
+:root {
+  --r:   10px;
+  --rsm: 6px;
+  --rlg: 16px;
+  --fh:  'Syne', sans-serif;
+  --fb:  'Plus Jakarta Sans', sans-serif;
+  --fm:  'IBM Plex Mono', monospace;
+  --sw:  244px;
+  --tr:  0.18s ease;
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
+html { scroll-behavior:smooth; -webkit-tap-highlight-color:transparent }
+body { font-family:var(--fb); background:var(--bg); color:var(--txt);
+       min-height:100vh; overflow-x:hidden; line-height:1.6;
+       transition:background .25s,color .25s }
+h1,h2,h3,h4 { font-family:var(--fh); line-height:1.2 }
+a { color:var(--acc); cursor:pointer; text-decoration:none }
+button { cursor:pointer; border:none; background:none; font-family:var(--fb) }
+input,select,textarea { font-family:var(--fb) }
+img { max-width:100% }
+
+/* PAGE SYSTEM */
+.page  { display:none; min-height:100vh; flex-direction:column }
+.page.active { display:flex }
+#page-app.active { flex-direction:row }
+.section { display:none; padding:28px 32px; min-height:calc(100vh - 64px) }
+.section.active { display:block }
+.hidden { display:none !important }
+
+/* ── BOUTONS ──────────────────────────────────────────────── */
+.btn {
+  display:inline-flex; align-items:center; gap:7px;
+  padding:10px 22px; border-radius:var(--rsm); font-weight:600;
+  font-size:.875rem; transition:all var(--tr); border:none;
+  letter-spacing:.01em; white-space:nowrap;
+}
+.btn-p { background:var(--acc); color:#fff }
+.btn-p:hover { background:var(--acc-d); transform:translateY(-1px); box-shadow:var(--shadow-a) }
+.btn-p:active { transform:translateY(0) }
+.btn-g { background:var(--surf2); color:var(--txt); border:1px solid var(--bdr2) }
+.btn-g:hover { border-color:var(--acc); color:var(--acc) }
+.btn-d { background:var(--err-bg); color:var(--err); border:1px solid rgba(231,76,60,.30) }
+.btn-d:hover { background:rgba(231,76,60,.18) }
+.btn.sm  { padding:5px 13px; font-size:.78rem }
+.btn.xl  { padding:14px 32px; font-size:1rem; border-radius:var(--r) }
+.btn.full{ width:100%; justify-content:center }
+.btn:disabled { opacity:.5; cursor:not-allowed; transform:none !important }
+
+/* ── FORMULAIRES ─────────────────────────────────────────── */
+.fg { display:flex; flex-direction:column; gap:5px; margin-bottom:14px }
+.fg label { font-size:.75rem; font-weight:700; color:var(--txt2);
+             text-transform:uppercase; letter-spacing:.06em }
+.fg input,.fg select,.fg textarea {
+  background:var(--surf2); border:1px solid var(--bdr2);
+  border-radius:var(--rsm); color:var(--txt); padding:11px 13px;
+  font-size:.88rem; transition:border-color var(--tr),box-shadow var(--tr);
+  width:100%;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus {
+  outline:none; border-color:var(--acc);
+  box-shadow:0 0 0 3px var(--acc-glow);
+}
+.fg input::placeholder { color:var(--txt3) }
+.fr { display:grid; grid-template-columns:1fr 1fr; gap:12px }
+.ferr {
+  background:var(--err-bg); border:1px solid rgba(231,76,60,.30);
+  color:var(--err); padding:10px 13px; border-radius:var(--rsm);
+  font-size:.83rem; margin-bottom:14px;
+}
+
+/* ── TOASTS ──────────────────────────────────────────────── */
+.toast {
+  position:fixed; bottom:24px; right:24px; z-index:9999;
+  background:var(--surf); border:1px solid var(--bdr2);
+  border-radius:var(--r); padding:13px 20px; font-size:.85rem;
+  box-shadow:var(--shadow); transform:translateX(130%);
+  transition:transform .32s cubic-bezier(.34,1.56,.64,1);
+  max-width:320px; display:flex; align-items:center; gap:10px;
+}
+.toast.show { transform:translateX(0) }
+.toast-ok  { border-color:rgba(46,204,113,.35); }
+.toast-err { border-color:rgba(231,76,60,.35); }
+.toast-info{ border-color:var(--bdr2) }
+.toast-ico { font-size:1.1rem; flex-shrink:0 }
+
+/* ═══════════════════════════════════════════════════════════
+   LANDING
+   ═══════════════════════════════════════════════════════════ */
+#page-landing { background:var(--bg); position:relative; overflow:hidden }
+.l-orb {
+  position:fixed; border-radius:50%; filter:blur(80px);
+  pointer-events:none; z-index:0;
+}
+.l-orb1 { width:600px;height:600px;top:-200px;right:-100px;
+           background:radial-gradient(circle,var(--acc-glow) 0%,transparent 70%) }
+.l-orb2 { width:400px;height:400px;bottom:-100px;left:-50px;
+           background:radial-gradient(circle,var(--acc-glow) 0%,transparent 70%);
+           opacity:.5 }
+
+.lnav {
+  position:relative; z-index:10; display:flex;
+  justify-content:space-between; align-items:center;
+  padding:18px 48px; border-bottom:1px solid var(--bdr);
+  background:var(--topbar); backdrop-filter:blur(14px);
+}
+.logo {
+  display:flex; align-items:center; gap:11px;
+  user-select:none; cursor:default;
+}
+.logo-mark {
+  width:38px; height:38px; border-radius:9px;
+  background:var(--acc); display:flex; align-items:center;
+  justify-content:center; font-size:1.2rem; flex-shrink:0;
+  box-shadow:0 0 16px var(--acc-glow);
+}
+.logo-mark.sm { width:32px; height:32px; font-size:1rem; border-radius:7px }
+.logo-mark.xs { width:26px; height:26px; font-size:.8rem; border-radius:5px }
+.logo-word { font-family:var(--fh); font-weight:800; font-size:1rem;
+              color:var(--txt); letter-spacing:.02em }
+.logo-word span { color:var(--acc) }
+.nav-r { display:flex; gap:10px; align-items:center }
+
+/* Theme switcher */
+.tsw { display:flex; gap:3px; background:var(--surf2);
+       border:1px solid var(--bdr); border-radius:100px; padding:4px }
+.tp  { width:20px; height:20px; border-radius:50%; border:2px solid transparent;
+       cursor:pointer; transition:transform .2s,border-color .2s }
+.tp:hover { transform:scale(1.2) }
+.tp.on { border-color:var(--txt) }
+.tp[data-t="dark"]  { background:linear-gradient(135deg,#1C1A18,#FF6B00) }
+.tp[data-t="light"] { background:linear-gradient(135deg,#F7F5F2,#E05500) }
+.tp[data-t="neon"]  { background:linear-gradient(135deg,#000,#00FF94) }
+.tp[data-t="ocean"] { background:linear-gradient(135deg,#020D1A,#38BDF8) }
+
+.hero {
+  position:relative; z-index:5; max-width:880px;
+  margin:0 auto; padding:96px 32px 72px; text-align:center;
+}
+.hero-badge {
+  display:inline-flex; align-items:center; gap:7px;
+  background:var(--acc-glow); border:1px solid rgba(255,107,0,.25);
+  color:var(--acc-l); font-size:.78rem; font-weight:700;
+  padding:6px 16px; border-radius:100px; margin-bottom:24px;
+  letter-spacing:.06em; text-transform:uppercase;
+}
+.hero h1 {
+  font-size:clamp(2.4rem,5.5vw,4rem); font-weight:800;
+  margin-bottom:20px; line-height:1.08; letter-spacing:-.01em;
+}
+.hero h1 em { font-style:normal; color:var(--acc) }
+.hero-sub {
+  color:var(--txt2); font-size:1.05rem; max-width:560px;
+  margin:0 auto 36px; font-weight:400; line-height:1.7;
+}
+.hero-cta { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:52px }
+.hero-stats {
+  display:flex; justify-content:center; border:1px solid var(--bdr);
+  border-radius:var(--r); overflow:hidden; background:var(--surf);
+  width:fit-content; margin:0 auto;
+}
+.hstat { padding:18px 32px; text-align:center }
+.hstat b { display:block; font-family:var(--fh); font-size:1.7rem;
+            font-weight:800; color:var(--acc) }
+.hstat small { font-size:.75rem; color:var(--txt2) }
+.hdiv { width:1px; background:var(--bdr); align-self:stretch }
+.feats {
+  position:relative; z-index:5;
+  display:grid; grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--bdr); background:var(--surf);
+}
+.feat { padding:36px 28px; border-right:1px solid var(--bdr); transition:background var(--tr) }
+.feat:last-child { border-right:none }
+.feat:hover { background:var(--surf2) }
+.feat i { font-size:1.8rem; margin-bottom:14px; display:block; font-style:normal }
+.feat h3 { font-size:.93rem; font-weight:700; margin-bottom:7px }
+.feat p  { font-size:.82rem; color:var(--txt2); line-height:1.65 }
+
+/* RT STATUS BANNER */
+.rt-banner {
+  position:sticky; top:0; z-index:200;
+  padding:10px 20px; font-size:.82rem; font-weight:600;
+  display:none; align-items:center; gap:10px;
+  border-bottom:1px solid var(--bdr);
+}
+.rt-banner.show { display:flex }
+.rt-banner.cfg  { background:rgba(243,156,18,.12); color:var(--warn);
+                   border-color:rgba(243,156,18,.25) }
+.rt-banner.ok   { background:rgba(46,204,113,.08); color:var(--ok);
+                   border-color:rgba(46,204,113,.20) }
+.rt-dot-anim { width:7px; height:7px; border-radius:50%; background:currentColor;
+                animation:pulse 1.8s infinite; flex-shrink:0 }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+/* ═══════════════════════════════════════════════════════════
+   AUTH
+   ═══════════════════════════════════════════════════════════ */
+.auth-wrap { display:flex; width:100%; min-height:100vh }
+.auth-l {
+  width:52%; padding:48px; display:flex; align-items:flex-start;
+  justify-content:center; background:var(--bg); overflow-y:auto;
+}
+.auth-li { width:100%; max-width:420px; padding-top:16px }
+.auth-r {
+  flex:1; background:var(--surf); display:flex; align-items:center;
+  justify-content:center; position:relative; overflow:hidden;
+  border-left:1px solid var(--bdr);
+}
+.auth-r-inner { position:relative; width:100%; height:100%;
+                 display:flex; align-items:center; justify-content:center }
+.orb-r { position:absolute; border-radius:50%; border:1px solid var(--bdr2) }
+.orb1 { width:360px;height:360px;top:50%;left:50%;transform:translate(-50%,-50%) }
+.orb2 { width:240px;height:240px;top:50%;left:50%;transform:translate(-50%,-50%);
+         background:var(--acc-glow) }
+.orb3 { width:120px;height:120px;top:50%;left:50%;transform:translate(-50%,-50%);
+         background:rgba(255,107,0,.12) }
+.promo-card {
+  position:relative; z-index:5; background:var(--bg2);
+  border:1px solid var(--bdr2); border-radius:var(--rlg);
+  padding:36px; text-align:center; max-width:260px;
+  box-shadow:var(--shadow-a);
+}
+.promo-card i { font-size:2.8rem; margin-bottom:14px; display:block; font-style:normal }
+.promo-card h3 { font-size:1.3rem; color:var(--acc); margin-bottom:10px }
+.promo-card p  { font-size:.84rem; color:var(--txt2) }
+.back-btn { color:var(--txt2); font-size:.84rem; margin-bottom:28px;
+             display:inline-block; transition:color var(--tr) }
+.back-btn:hover { color:var(--txt) }
+.auth-li h2 { font-size:1.8rem; font-weight:800; margin-bottom:7px }
+.auth-sub   { color:var(--txt2); font-size:.88rem; margin-bottom:28px }
+.auth-foot  { text-align:center; font-size:.83rem; color:var(--txt2); margin-top:18px }
+.demo-hint  {
+  display:flex; align-items:center; gap:10px; font-size:.8rem; color:var(--txt2);
+  background:var(--surf); border:1px solid var(--bdr); border-radius:var(--rsm);
+  padding:9px 13px; margin:14px 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   APP LAYOUT
+   ═══════════════════════════════════════════════════════════ */
+.sidebar {
+  width:var(--sw); background:var(--surf); border-right:1px solid var(--bdr);
+  display:flex; flex-direction:column; height:100vh;
+  position:sticky; top:0; flex-shrink:0; overflow:hidden;
+  transition:width var(--tr); z-index:100;
+}
+.sidebar.coll { width:60px }
+.sidebar.coll .nl,.sidebar.coll .sb-title,.sidebar.coll .lic-txt,
+.sidebar.coll .mm-info,.sidebar.coll .grp-lbl { display:none }
+.sidebar.coll .ni  { justify-content:center; padding:12px; margin:0 6px }
+.sidebar.coll .sb-hdr { padding:14px 10px }
+.sb-hdr {
+  display:flex; align-items:center; gap:9px; padding:18px 14px;
+  border-bottom:1px solid var(--bdr); min-height:66px;
+}
+.sb-title { flex:1; overflow:hidden }
+.sb-cname {
+  display:block; font-family:var(--fh); font-weight:700;
+  font-size:.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.sb-app { font-size:.66rem; color:var(--txt3) }
+.sb-tog { color:var(--txt2); padding:4px; border-radius:4px;
+           transition:color var(--tr); font-size:1.1rem }
+.sb-tog:hover { color:var(--txt) }
+.lic-badge {
+  display:flex; align-items:center; gap:7px; padding:7px 14px;
+  font-size:.73rem; font-weight:700; border-bottom:1px solid var(--bdr);
+  color:var(--ok); letter-spacing:.02em;
+}
+.lic-badge.exp { color:var(--err) }
+.lic-badge.warn{ color:var(--warn) }
+.lic-dot { width:6px; height:6px; border-radius:50%;
+            background:currentColor; flex-shrink:0; animation:pulse 2s infinite }
+.sb-nav { flex:1; padding:10px 0; overflow-y:auto; display:flex; flex-direction:column; gap:1px }
+.grp-lbl {
+  font-size:.67rem; text-transform:uppercase; letter-spacing:.08em;
+  color:var(--txt3); padding:12px 22px 4px; font-weight:700;
+}
+.ni {
+  display:flex; align-items:center; gap:11px; padding:10px 14px;
+  color:var(--txt2); font-size:.85rem; font-weight:500;
+  border-radius:var(--rsm); margin:0 7px;
+  transition:all var(--tr); text-align:left; width:calc(100% - 14px);
+}
+.ni:hover { background:var(--surf2); color:var(--txt) }
+.ni.on {
+  background:var(--acc-glow); color:var(--acc);
+  border-left:2px solid var(--acc); padding-left:12px;
+  font-weight:600;
+}
+.ni-ico { font-size:1rem; flex-shrink:0; width:18px; text-align:center }
+.ni-badge {
+  margin-left:auto; min-width:16px; height:16px;
+  background:var(--err); color:#fff; border-radius:8px;
+  font-size:.62rem; font-weight:700; display:flex; align-items:center;
+  justify-content:center; padding:0 4px;
+}
+.sb-foot {
+  padding:14px; border-top:1px solid var(--bdr);
+  display:flex; align-items:center; gap:8px;
+}
+.mm-av {
+  width:30px; height:30px; border-radius:50%; background:var(--acc);
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700; font-size:.8rem; color:#fff; flex-shrink:0;
+}
+.mm-info { flex:1; overflow:hidden }
+.mm-name { display:block; font-size:.8rem; font-weight:600;
+            white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.mm-role { font-size:.67rem; color:var(--txt2) }
+.logout-btn { color:var(--txt2); font-size:1rem; padding:4px;
+               transition:color var(--tr) }
+.logout-btn:hover { color:var(--err) }
+
+.main { flex:1; overflow-y:auto; background:var(--bg); min-height:100vh }
+.topbar {
+  position:sticky; top:0; z-index:50;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:14px 28px; background:var(--topbar); backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--bdr); min-height:62px;
+}
+.tb-l { display:flex; align-items:center; gap:11px }
+.tb-l h2 { font-size:1.05rem; font-weight:700 }
+.mob-tog { display:none; color:var(--txt2); font-size:1.2rem; padding:4px }
+.tb-r { display:flex; align-items:center; gap:8px }
+.rt-chip {
+  display:flex; align-items:center; gap:5px; font-size:.73rem;
+  padding:4px 10px; border-radius:100px; border:1px solid var(--bdr2);
+  font-weight:600; transition:all .3s;
+}
+.rt-chip.live { border-color:rgba(46,204,113,.35); color:var(--ok) }
+.rt-chip.dead { border-color:var(--bdr); color:var(--txt3) }
+.rt-chip.cfg  { border-color:rgba(243,156,18,.35); color:var(--warn) }
+.shop-chip { display:flex; align-items:center; gap:6px; font-size:.78rem;
+              background:var(--surf); border:1px solid var(--bdr);
+              border-radius:100px; padding:5px 13px; font-weight:500 }
+
+/* ═══════════════════════════════════════════════════════════
+   DASHBOARD
+   ═══════════════════════════════════════════════════════════ */
+.welcome-band {
+  background:linear-gradient(135deg,var(--acc-glow),transparent);
+  border:1px solid rgba(255,107,0,.18); border-radius:var(--r);
+  padding:22px 26px; margin-bottom:24px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.welcome-band h3 { font-size:1.2rem; margin-bottom:3px }
+.welcome-band p  { font-size:.82rem; color:var(--txt2) }
+.kpi-row { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:22px }
+.kpi {
+  background:var(--surf); border:1px solid var(--bdr);
+  border-radius:var(--r); padding:20px; transition:border-color var(--tr);
+}
+.kpi:hover { border-color:var(--bdr2) }
+.kpi.hi   { border-color:rgba(255,107,0,.25) }
+.kpi-lbl  { font-size:.72rem; color:var(--txt2); text-transform:uppercase;
+             letter-spacing:.06em; margin-bottom:8px; font-weight:700 }
+.kpi-val  { font-family:var(--fh); font-size:1.7rem; font-weight:800;
+             margin-bottom:3px; color:var(--txt) }
+.kpi.hi .kpi-val { color:var(--acc) }
+.kpi-sub  { font-size:.73rem; color:var(--txt3) }
+.dash-grid{ display:grid; grid-template-columns:3fr 2fr; gap:18px }
+.dash-card{
+  background:var(--surf); border:1px solid var(--bdr); border-radius:var(--r); overflow:hidden;
+}
+.dc-hdr {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:14px 18px; border-bottom:1px solid var(--bdr);
+}
+.dc-hdr h4 { font-size:.88rem; font-weight:700 }
+.sale-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:11px 18px; border-bottom:1px solid var(--bdr); font-size:.83rem;
+}
+.sale-row:last-child { border-bottom:none }
+.notif-panel {
+  background:var(--surf); border:1px solid rgba(255,107,0,.20);
+  border-radius:var(--r); margin-bottom:20px; overflow:hidden;
+}
+.np-hdr {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:13px 18px; border-bottom:1px solid var(--bdr); background:var(--acc-glow);
+}
+.np-hdr h4 { font-size:.88rem; font-weight:700; display:flex; align-items:center; gap:7px }
+.np-item {
+  display:flex; align-items:flex-start; gap:11px; padding:11px 18px;
+  border-bottom:1px solid var(--bdr); transition:background var(--tr);
+  cursor:pointer;
+}
+.np-item:last-child { border-bottom:none }
+.np-item:hover { background:var(--surf2) }
+.np-ico { font-size:1.1rem; flex-shrink:0; margin-top:1px }
+.np-msg { font-size:.83rem; font-weight:600; margin-bottom:2px }
+.np-time{ font-size:.73rem; color:var(--txt2) }
+.badge  {
+  background:var(--acc); color:#fff; border-radius:100px;
+  padding:1px 8px; font-size:.72rem; font-weight:700; margin-left:6px;
+}
+.badge-err { background:var(--err) }
+.empty  { padding:20px; text-align:center; color:var(--txt2); font-size:.83rem }
+
+/* ═══════════════════════════════════════════════════════════
+   POS
+   ═══════════════════════════════════════════════════════════ */
+.pos-wrap { display:grid; grid-template-columns:1fr 360px; height:calc(100vh - 62px) }
+.pos-left { overflow-y:auto; padding:18px; border-right:1px solid var(--bdr) }
+.pos-search {
+  width:100%; background:var(--surf); border:1px solid var(--bdr2);
+  border-radius:var(--rsm); color:var(--txt); padding:11px 15px;
+  font-size:.88rem; margin-bottom:16px;
+  transition:border-color var(--tr);
+}
+.pos-search:focus { outline:none; border-color:var(--acc) }
+.prod-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:10px }
+.pcard {
+  background:var(--surf); border:1px solid var(--bdr);
+  border-radius:var(--r); padding:15px 12px; cursor:pointer;
+  transition:all .18s; text-align:center; user-select:none; position:relative;
+}
+.pcard:hover { border-color:var(--acc); transform:translateY(-2px); box-shadow:var(--shadow-a) }
+.pcard:active { transform:translateY(0) }
+.pcard.oos { opacity:.45; cursor:not-allowed }
+.pcard.added { border-color:var(--ok); background:var(--ok-bg) }
+.pcard-ico  { font-size:1.9rem; margin-bottom:9px }
+.pcard-name { font-weight:600; font-size:.82rem; margin-bottom:4px; line-height:1.3 }
+.pcard-price{ color:var(--acc); font-weight:700; font-size:.88rem; font-family:var(--fm) }
+.pcard-stk  { font-size:.68rem; color:var(--txt3); margin-top:3px }
+.pcard-stk.low { color:var(--warn) }
+.pcard-stk.out { color:var(--err) }
+
+/* CART */
+.cart-side { display:flex; flex-direction:column; background:var(--surf); overflow:hidden }
+.cart-hdr  {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:14px 18px; border-bottom:1px solid var(--bdr); flex-shrink:0;
+}
+.cart-hdr h3 { font-size:.95rem; font-weight:700 }
+.cart-body { flex:1; overflow-y:auto; padding:8px }
+.ci {
+  display:flex; align-items:center; gap:7px; padding:9px 11px;
+  background:var(--bg); border:1px solid var(--bdr);
+  border-radius:var(--rsm); margin-bottom:7px;
+}
+.ci-name  { flex:1; font-size:.82rem; font-weight:500; line-height:1.3 }
+.ci-ctrl  { display:flex; align-items:center; gap:4px }
+.ci-btn   {
+  width:22px; height:22px; border-radius:50%; background:var(--surf2);
+  border:1px solid var(--bdr2); color:var(--txt); font-size:.9rem;
+  display:flex; align-items:center; justify-content:center;
+  transition:all var(--tr); flex-shrink:0;
+}
+.ci-btn:hover { background:var(--acc); color:#fff; border-color:var(--acc) }
+.ci-qty  { min-width:22px; text-align:center; font-weight:700; font-size:.85rem; font-family:var(--fm) }
+.ci-price{ font-weight:700; color:var(--acc); font-size:.82rem; font-family:var(--fm); white-space:nowrap }
+.ci-rm   { color:var(--txt3); font-size:.82rem; padding:3px; transition:color var(--tr); flex-shrink:0 }
+.ci-rm:hover { color:var(--err) }
+.cart-cli {
+  padding:12px 18px; border-top:1px solid var(--bdr); flex-shrink:0;
+}
+.cart-cli-hdr {
+  display:flex; align-items:center; gap:7px; margin-bottom:10px;
+  font-size:.8rem; font-weight:700; color:var(--txt2);
+  text-transform:uppercase; letter-spacing:.05em;
+}
+.cart-cli input,.cart-cli select {
+  width:100%; background:var(--bg); border:1px solid var(--bdr2);
+  border-radius:var(--rsm); color:var(--txt); padding:8px 11px;
+  font-size:.82rem; margin-bottom:6px;
+}
+.cart-cli input:focus,.cart-cli select:focus {
+  outline:none; border-color:var(--acc);
+}
+.cart-foot { padding:14px 18px; border-top:1px solid var(--bdr); flex-shrink:0 }
+.ct-row { display:flex; justify-content:space-between; font-size:.85rem; margin-bottom:7px }
+.ct-row.big { font-size:1.1rem; font-weight:800; color:var(--acc) }
+.checkout-btn {
+  width:100%; padding:15px; background:var(--acc); color:#fff;
+  font-size:1rem; font-weight:800; font-family:var(--fh);
+  border:none; cursor:pointer; transition:background var(--tr);
+  letter-spacing:.01em;
+}
+.checkout-btn:hover { background:var(--acc-d) }
+.checkout-btn:disabled { opacity:.5; cursor:not-allowed }
+
+/* ═══════════════════════════════════════════════════════════
+   VENTE RAPIDE
+   ═══════════════════════════════════════════════════════════ */
+.qr-wrap { display:grid; grid-template-columns:1fr 1fr; gap:22px; max-width:780px }
+.qr-disp {
+  font-family:var(--fm); font-size:2.8rem; font-weight:600;
+  text-align:right; padding:18px 20px; background:var(--surf);
+  border:1px solid var(--bdr2); border-radius:var(--r);
+  color:var(--acc); margin-bottom:14px; letter-spacing:.02em;
+}
+.qr-pad { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:14px }
+.qr-key {
+  background:var(--surf); border:1px solid var(--bdr2);
+  border-radius:var(--rsm); padding:17px; font-size:1.25rem;
+  font-weight:700; font-family:var(--fh); transition:all var(--tr);
+}
+.qr-key:hover { background:var(--acc); color:#fff; border-color:var(--acc) }
+.qr-key.del { color:var(--err) }
+.qr-panel {
+  background:var(--surf); border:1px solid var(--bdr);
+  border-radius:var(--r); display:flex; flex-direction:column; overflow:hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TABLES
+   ═══════════════════════════════════════════════════════════ */
+.tbl { width:100%; border-collapse:collapse; background:var(--surf);
+        border-radius:var(--r); overflow:hidden; box-shadow:var(--card-sh) }
+.tbl thead th {
+  padding:11px 15px; text-align:left; background:var(--surf2);
+  font-weight:700; font-size:.73rem; text-transform:uppercase;
+  letter-spacing:.06em; color:var(--txt2);
+}
+.tbl tbody td { padding:11px 15px; border-bottom:1px solid var(--bdr); font-size:.85rem }
+.tbl tbody tr:last-child td { border-bottom:none }
+.tbl tbody tr:hover { background:var(--surf2) }
+.tbl-wrap { overflow-x:auto }
+.sbdg { padding:2px 9px; border-radius:100px; font-size:.73rem; font-weight:700; font-family:var(--fm) }
+.s-ok   { background:var(--ok-bg); color:var(--ok) }
+.s-low  { background:var(--warn-bg); color:var(--warn) }
+.s-zero { background:var(--err-bg); color:var(--err) }
+.acts   { display:flex; gap:5px; flex-wrap:wrap }
+.tbtn   {
+  background:var(--surf2); border:1px solid var(--bdr2);
+  color:var(--txt); padding:3px 9px; border-radius:var(--rsm);
+  font-size:.75rem; transition:all var(--tr);
+}
+.tbtn:hover { border-color:var(--acc); color:var(--acc) }
+.tbtn.d:hover { border-color:var(--err); color:var(--err) }
+.tbtn.ok:hover { border-color:var(--ok); color:var(--ok) }
+.cancel-badge {
+  background:var(--err-bg); color:var(--err); padding:2px 8px;
+  border-radius:var(--rsm); font-size:.73rem; font-weight:600;
+}
+.row-cancelled td { opacity:.55 }
+
+/* STOCK BAR */
+.stk-bar { width:90px; height:5px; background:var(--surf3); border-radius:3px; overflow:hidden }
+.stk-fill { height:100%; border-radius:3px }
+.stk-fill.ok   { background:var(--ok) }
+.stk-fill.low  { background:var(--warn) }
+.stk-fill.zero { background:var(--err) }
+
+/* SALE TABS */
+.s-tabs { display:flex; gap:0; margin-bottom:18px; border-bottom:1px solid var(--bdr) }
+.s-tab  {
+  padding:9px 18px; font-size:.83rem; font-weight:600; color:var(--txt2);
+  border-bottom:2px solid transparent; transition:all var(--tr); cursor:pointer;
+}
+.s-tab.on { color:var(--acc); border-bottom-color:var(--acc) }
+
+/* SETTINGS */
+.sett-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px }
+.sc {
+  background:var(--surf); border:1px solid var(--bdr); border-radius:var(--r); padding:22px;
+}
+.sc h4 { font-size:.9rem; font-weight:700; margin-bottom:14px;
+          padding-bottom:11px; border-bottom:1px solid var(--bdr) }
+
+/* ═══════════════════════════════════════════════════════════
+   MODALS
+   ═══════════════════════════════════════════════════════════ */
+.mo {
+  position:fixed; inset:0; background:rgba(0,0,0,.65);
+  backdrop-filter:blur(5px); z-index:1000;
+  display:flex; align-items:center; justify-content:center; padding:18px;
+}
+.modal {
+  background:var(--surf); border:1px solid var(--bdr2);
+  border-radius:var(--rlg); max-width:520px; width:100%;
+  max-height:92vh; overflow-y:auto; box-shadow:var(--shadow);
+  animation:modalIn .22s cubic-bezier(.34,1.56,.64,1);
+}
+.modal.wide { max-width:680px }
+.modal.xl   { max-width:900px }
+@keyframes modalIn { from{opacity:0;transform:scale(.94)} to{opacity:1;transform:scale(1)} }
+.mo-hdr {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:18px 22px; border-bottom:1px solid var(--bdr);
+}
+.mo-hdr h3 { font-size:.95rem; font-weight:700 }
+.mo-cls { color:var(--txt2); font-size:1.1rem; padding:4px; transition:color var(--tr) }
+.mo-cls:hover { color:var(--err) }
+.mo-body { padding:22px }
+.mo-ftr  {
+  display:flex; gap:9px; justify-content:flex-end;
+  padding:14px 22px; border-top:1px solid var(--bdr);
+}
+
+/* PIN */
+.pin-dots { display:flex; gap:12px; justify-content:center; margin:22px 0 }
+.pin-dot  {
+  width:15px; height:15px; border-radius:50%;
+  border:2px solid var(--bdr2); transition:all .18s;
+}
+.pin-dot.on { background:var(--acc); border-color:var(--acc); transform:scale(1.1) }
+.pin-pad { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; max-width:260px; margin:0 auto }
+.pin-key {
+  padding:16px; font-size:1.3rem; font-weight:700; font-family:var(--fh);
+  background:var(--surf2); border:1px solid var(--bdr2);
+  border-radius:var(--rsm); transition:all var(--tr);
+}
+.pin-key:hover { background:var(--acc); color:#fff; border-color:var(--acc) }
+
+/* ═══════════════════════════════════════════════════════════
+   ADMIN DEV PANEL
+   ═══════════════════════════════════════════════════════════ */
+.dev-panel {
+  position:fixed; inset:0; background:var(--bg); z-index:2000;
+  display:flex; flex-direction:column; overflow:hidden;
+}
+.dev-topbar {
+  display:flex; align-items:center; gap:14px; padding:14px 24px;
+  background:var(--surf); border-bottom:1px solid var(--bdr);
+  flex-shrink:0;
+}
+.dev-topbar h2 { font-size:1rem; font-weight:700; flex:1 }
+.dev-badge {
+  background:linear-gradient(135deg,var(--acc),var(--acc-d));
+  color:#fff; padding:3px 10px; border-radius:100px;
+  font-size:.72rem; font-weight:700; letter-spacing:.04em;
+}
+.dev-tabs {
+  display:flex; gap:0; background:var(--surf); padding:0 24px;
+  border-bottom:1px solid var(--bdr); flex-shrink:0;
+}
+.dev-tab {
+  padding:11px 20px; font-size:.83rem; font-weight:600;
+  color:var(--txt2); border-bottom:2px solid transparent;
+  transition:all var(--tr); cursor:pointer;
+}
+.dev-tab.on { color:var(--acc); border-bottom-color:var(--acc) }
+.dev-content { flex:1; overflow-y:auto; padding:24px }
+.dev-sect { display:none }
+.dev-sect.on { display:block }
+.dev-card {
+  background:var(--surf); border:1px solid var(--bdr);
+  border-radius:var(--r); overflow:hidden; margin-bottom:18px;
+}
+.dev-card-hdr {
+  padding:13px 18px; background:var(--surf2);
+  border-bottom:1px solid var(--bdr);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.dev-card-hdr h3 { font-size:.88rem; font-weight:700 }
+.dev-card-body { padding:18px }
+.sub-badge {
+  padding:3px 9px; border-radius:100px;
+  font-size:.72rem; font-weight:700;
+}
+.sub-trial   { background:var(--warn-bg); color:var(--warn) }
+.sub-active  { background:var(--ok-bg);   color:var(--ok) }
+.sub-expired { background:var(--err-bg);  color:var(--err) }
+.sub-monthly { background:rgba(56,189,248,.12); color:#38BDF8 }
+
+/* ═══════════════════════════════════════════════════════════
+   THERMAL PRINT PREVIEW
+   ═══════════════════════════════════════════════════════════ */
+.ticket-preview {
+  background:#fff; color:#000; font-family:var(--fm);
+  font-size:11px; max-width:300px; margin:0 auto;
+  padding:16px 14px; line-height:1.5; border-radius:var(--rsm);
+  box-shadow:var(--shadow);
+}
+.ticket-preview.w58 { max-width:220px; font-size:10px }
+.tk-center { text-align:center }
+.tk-line   { border-top:1px dashed #ccc; margin:8px 0 }
+.tk-row    { display:flex; justify-content:space-between }
+.tk-bold   { font-weight:700 }
+.tk-big    { font-size:1.3em; font-weight:700 }
+
+/* BLE MODAL */
+.ble-status {
+  display:flex; align-items:center; gap:9px; padding:11px 14px;
+  border-radius:var(--rsm); font-size:.83rem; margin-bottom:14px;
+}
+.ble-status.searching { background:var(--warn-bg); border:1px solid rgba(243,156,18,.25); color:var(--warn) }
+.ble-status.connected { background:var(--ok-bg);   border:1px solid rgba(46,204,113,.25); color:var(--ok) }
+.ble-status.error     { background:var(--err-bg);  border:1px solid rgba(231,76,60,.25);  color:var(--err) }
+.print-fmt-btns { display:flex; gap:8px; margin-bottom:14px }
+.pfmt-btn {
+  flex:1; padding:10px; background:var(--surf2); border:1px solid var(--bdr2);
+  border-radius:var(--rsm); font-size:.83rem; font-weight:600;
+  transition:all var(--tr); text-align:center;
+}
+.pfmt-btn.on  { border-color:var(--acc); color:var(--acc); background:var(--acc-glow) }
+
+/* ═══════════════════════════════════════════════════════════
+   OFFLINE
+   ═══════════════════════════════════════════════════════════ */
+#offline-bar {
+  position:fixed; bottom:0; left:0; right:0; z-index:9000;
+  background:rgba(243,156,18,.95); color:#000;
+  padding:9px 20px; font-size:.82rem; font-weight:600;
+  display:none; align-items:center; gap:10px;
+}
+body.offline #offline-bar { display:flex }
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════ */
+@media(max-width:900px){
+  .kpi-row   { grid-template-columns:1fr 1fr }
+  .dash-grid { grid-template-columns:1fr }
+  .sett-grid { grid-template-columns:1fr }
+  .pos-wrap  { grid-template-columns:1fr; height:auto }
+  .cart-side { min-height:380px }
+}
+@media(max-width:768px){
+  .lnav { padding:14px 18px }
+  .hero  { padding:56px 18px 36px }
+  .feats { grid-template-columns:1fr 1fr }
+  .auth-l { width:100% }
+  .auth-r { display:none }
+  .mob-tog { display:block }
+  .sidebar {
+    position:fixed; left:-100%; height:100vh;
+    transition:left .28s; box-shadow:none;
+  }
+  .sidebar.mob-open { left:0; box-shadow:var(--shadow) }
+  .section { padding:16px }
+  .topbar  { padding:12px 16px }
+  .qr-wrap { grid-template-columns:1fr }
+  .dev-tabs{ overflow-x:auto }
+  .dev-tab { white-space:nowrap }
+}
+@media print {
+  body * { visibility:hidden }
+  .ticket-preview, .ticket-preview * { visibility:visible }
+  .ticket-preview { position:fixed; inset:0; margin:0 auto; box-shadow:none }
+}
+</style>
+</head>
+<body>
+
+<!-- OFFLINE BAR -->
+<div id="offline-bar">
+  📡 Mode hors ligne — Synchronisation automatique au retour
+</div>
+
+<!-- ════════════════════════════════════════════════
+     LANDING
+     ════════════════════════════════════════════════ -->
+<div id="page-landing" class="page active">
+  <div class="l-orb l-orb1"></div>
+  <div class="l-orb l-orb2"></div>
+  <nav class="lnav">
+    <div class="logo" id="logo-trigger">
+      <div class="logo-mark">🌐</div>
+      <div class="logo-word"><span>DIGITALE</span> SOLUTION</div>
+    </div>
+    <div class="nav-r">
+      <div class="tsw" id="tsw-land">
+        <div class="tp on" data-t="dark"  onclick="setTheme('dark')"></div>
+        <div class="tp"    data-t="light" onclick="setTheme('light')"></div>
+        <div class="tp"    data-t="neon"  onclick="setTheme('neon')"></div>
+        <div class="tp"    data-t="ocean" onclick="setTheme('ocean')"></div>
+      </div>
+      <button class="btn btn-g" onclick="goPage('page-login')">Connexion</button>
+      <button class="btn btn-p" onclick="goPage('page-register')">Créer mon commerce</button>
+    </div>
+  </nav>
+  <div class="hero">
+    <div class="hero-badge">🌍 N°1 en Afrique de l'Ouest</div>
+    <h1>Gérez votre commerce<br/><em>où que vous soyez</em></h1>
+    <p class="hero-sub">Ventes, stock, clients et factures synchronisés en temps réel sur tous vos appareils. Firebase SaaS multi-commerce.</p>
+    <div class="hero-cta">
+      <button class="btn btn-p xl" onclick="goPage('page-register')">Démarrer gratuitement →</button>
+      <button class="btn btn-g xl" onclick="demoLogin()">Voir la démo</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><b>2 500+</b><small>Commerces actifs</small></div>
+      <div class="hdiv"></div>
+      <div class="hstat"><b>12 pays</b><small>Couverts</small></div>
+      <div class="hdiv"></div>
+      <div class="hstat"><b>⚡ RT</b><small>Temps réel</small></div>
+      <div class="hdiv"></div>
+      <div class="hstat"><b>100%</b><small>Offline ready</small></div>
+    </div>
+  </div>
+  <div class="feats">
+    <div class="feat"><i>⚡</i><h3>Firebase temps réel</h3><p>Vente sur téléphone A → visible instantanément sur tablet B. onSnapshot() sur tous les appareils.</p></div>
+    <div class="feat"><i>🏪</i><h3>Multi-commerces</h3><p>Chaque commerce isolé et sécurisé. 100+ boutiques sur la même plateforme SaaS.</p></div>
+    <div class="feat"><i>🖨️</i><h3>Impression BLE</h3><p>Tickets thermiques 58mm & 80mm via Bluetooth. ESC/POS natif. Connexion sans fil.</p></div>
+    <div class="feat"><i>👥</i><h3>Multi-rôles</h3><p>Caissier, gérant, propriétaire. Chaque rôle voit uniquement ce qu'il doit voir.</p></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     REGISTER
+     ════════════════════════════════════════════════ -->
+<div id="page-register" class="page">
+  <div class="auth-wrap">
+    <div class="auth-l">
+      <div class="auth-li">
+        <button class="back-btn" onclick="goPage('page-landing')">← Retour</button>
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:24px">
+          <div class="logo-mark sm">🌐</div>
+          <div class="logo-word"><span>DIGITALE</span> SOLUTION</div>
+        </div>
+        <h2>Créez votre espace</h2>
+        <p class="auth-sub">Boutique opérationnelle en moins de 2 minutes.</p>
+        <div id="reg-err" class="ferr hidden"></div>
+        <div class="fg"><label>Nom du commerce</label><input id="reg-nom" placeholder="Ex: Restaurant Chez Aminata"/></div>
+        <div class="fr">
+          <div class="fg"><label>Propriétaire</label><input id="reg-proprio" placeholder="Votre nom"/></div>
+          <div class="fg"><label>Ville</label><input id="reg-ville" placeholder="Ex: Dakar"/></div>
+        </div>
+        <div class="fg"><label>Téléphone (identifiant)</label><input type="tel" id="reg-tel" placeholder="+225 07 XX XX XX XX"/></div>
+        <div class="fr">
+          <div class="fg"><label>Mot de passe</label><input type="password" id="reg-pwd" placeholder="Min. 6 caractères"/></div>
+          <div class="fg"><label>Confirmer</label><input type="password" id="reg-pwd2" placeholder="Répéter"/></div>
+        </div>
+        <div class="fg"><label>Type de commerce</label>
+          <select id="reg-type">
+            <option value="restaurant">🍽️ Restaurant / Café</option>
+            <option value="boutique">🛍️ Boutique / Magasin</option>
+            <option value="hotel">🏨 Hôtel / Hébergement</option>
+            <option value="pharmacie">💊 Pharmacie</option>
+            <option value="autre">📦 Autre</option>
+          </select>
+        </div>
+        <button class="btn btn-p full" id="reg-btn" onclick="doRegister()">Créer mon commerce →</button>
+        <p class="auth-foot">Déjà inscrit ? <a onclick="goPage('page-login')">Connectez-vous</a></p>
+      </div>
+    </div>
+    <div class="auth-r"><div class="auth-r-inner">
+      <div class="orb-r orb1"></div><div class="orb-r orb2"></div><div class="orb-r orb3"></div>
+      <div class="promo-card"><i>🎁</i><h3>30 jours gratuits</h3><p>Toutes les fonctionnalités sans engagement. Aucune carte requise.</p></div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     LOGIN
+     ════════════════════════════════════════════════ -->
+<div id="page-login" class="page">
+  <div class="auth-wrap">
+    <div class="auth-l">
+      <div class="auth-li">
+        <button class="back-btn" onclick="goPage('page-landing')">← Retour</button>
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:24px">
+          <div class="logo-mark sm">🌐</div>
+          <div class="logo-word"><span>DIGITALE</span> SOLUTION</div>
+        </div>
+        <h2>Bon retour !</h2>
+        <p class="auth-sub">Connectez-vous à votre espace Firebase.</p>
+        <div id="login-err" class="ferr hidden"></div>
+        <div class="fg"><label>Téléphone</label><input type="tel" id="login-tel" placeholder="+225 07 XX XX XX"/></div>
+        <div class="fg"><label>Mot de passe</label><input type="password" id="login-pwd" placeholder="Votre mot de passe"/></div>
+        <button class="btn btn-p full" id="login-btn" onclick="doLogin()">Se connecter →</button>
+        <div class="demo-hint">💡 Mode démo : <button class="btn btn-g sm" onclick="demoLogin()">Accès démo</button></div>
+        <p class="auth-foot">Pas de compte ? <a onclick="goPage('page-register')">Créer mon commerce</a></p>
+      </div>
+    </div>
+    <div class="auth-r"><div class="auth-r-inner">
+      <div class="orb-r orb1"></div><div class="orb-r orb2"></div><div class="orb-r orb3"></div>
+      <div class="promo-card"><i>⚡</i><h3>Temps réel Firebase</h3><p>Inscrivez-vous ici, connectez-vous sur n'importe quel appareil. Synchronisation instantanée.</p></div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     APP
+     ════════════════════════════════════════════════ -->
+<div id="page-app" class="page">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-hdr">
+      <div class="logo-mark xs" id="sb-logo-trigger">🌐</div>
+      <div class="sb-title">
+        <span class="sb-cname" id="sb-cname">Commerce</span>
+        <span class="sb-app">Digitale Solution</span>
+      </div>
+      <button class="sb-tog" onclick="toggleSidebar()">☰</button>
+    </div>
+    <div class="lic-badge" id="lic-badge">
+      <span class="lic-dot"></span>
+      <span class="lic-txt" id="lic-txt">Licence active</span>
+    </div>
+    <nav class="sb-nav" id="sb-nav">
+      <div class="grp-lbl">Vente</div>
+      <button class="ni on" data-s="pos"      onclick="goSect('pos')">     <span class="ni-ico">🛒</span><span class="nl">Point de Vente</span></button>
+      <button class="ni"    data-s="quick"    onclick="goSect('quick')">   <span class="ni-ico">⚡</span><span class="nl">Vente Rapide</span></button>
+      <button class="ni"    data-s="products" onclick="goSect('products')"><span class="ni-ico">📦</span><span class="nl">Produits</span></button>
+      <button class="ni"    data-s="sales"    onclick="goSect('sales')">   <span class="ni-ico">🧾</span><span class="nl">Mes Ventes</span></button>
+      <div class="grp-lbl" id="grp-gestion">Gestion</div>
+      <button class="ni" data-s="dashboard" onclick="goSect('dashboard')"><span class="ni-ico">📊</span><span class="nl">Dashboard</span><span class="ni-badge hidden" id="notif-badge">0</span></button>
+      <button class="ni" data-s="stock"     onclick="goSect('stock')">    <span class="ni-ico">🏭</span><span class="nl">Stock</span></button>
+      <button class="ni" data-s="clients"   onclick="goSect('clients')">  <span class="ni-ico">👥</span><span class="nl">Clients</span></button>
+      <button class="ni" data-s="settings"  onclick="goSect('settings')"> <span class="ni-ico">⚙️</span><span class="nl">Paramètres</span></button>
+    </nav>
+    <div class="sb-foot">
+      <div class="mm-av" id="mm-av">A</div>
+      <div class="mm-info">
+        <span class="mm-name" id="mm-name">—</span>
+        <span class="mm-role" id="mm-role">—</span>
+      </div>
+      <button class="logout-btn" onclick="doLogout()" title="Déconnexion">⏻</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <!-- RT STATUS BANNER -->
+    <div id="rt-banner" class="rt-banner">
+      <span class="rt-dot-anim"></span>
+      <span id="rt-banner-msg">Connexion Firebase en cours...</span>
+      <button class="btn btn-g sm" style="margin-left:auto" onclick="openFirebaseConfig()">⚙️ Configurer Firebase</button>
+    </div>
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="tb-l">
+        <button class="mob-tog" onclick="toggleSidebar()">☰</button>
+        <h2 id="tb-title">Point de Vente</h2>
+      </div>
+      <div class="tb-r">
+        <div class="rt-chip dead" id="rt-chip">
+          <span class="rt-dot-anim" style="display:none" id="rt-anim"></span>
+          <span id="rt-chip-txt">Local</span>
+        </div>
+        <div class="tsw" id="tsw-app">
+          <div class="tp on" data-t="dark"  onclick="setTheme('dark')"></div>
+          <div class="tp"    data-t="light" onclick="setTheme('light')"></div>
+          <div class="tp"    data-t="neon"  onclick="setTheme('neon')"></div>
+          <div class="tp"    data-t="ocean" onclick="setTheme('ocean')"></div>
+        </div>
+        <div class="shop-chip"><span>🏪</span><span id="cb-name">Commerce</span></div>
+        <button class="btn btn-p sm" onclick="goSect('pos')">+ Vente</button>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <section id="s-dashboard" class="section">
+      <div class="welcome-band">
+        <div><h3 id="w-msg">Bienvenue !</h3><p id="w-date" style="color:var(--txt2);font-size:.82rem"></p></div>
+        <span style="font-size:2.2rem">🌍</span>
+      </div>
+      <div id="notif-panel" class="notif-panel" style="display:none">
+        <div class="np-hdr">
+          <h4>🔔 Notifications <span class="badge" id="notif-cnt">0</span></h4>
+          <button class="btn btn-g sm" onclick="clearNotifs()">Tout effacer</button>
+        </div>
+        <div id="notif-list"><p class="empty">Aucune notification.</p></div>
+      </div>
+      <div id="low-stock-panel" style="display:none;background:var(--warn-bg);border:1px solid rgba(243,156,18,.25);border-radius:var(--r);margin-bottom:18px;overflow:hidden"></div>
+      <div class="kpi-row">
+        <div class="kpi hi"><div class="kpi-lbl">CA du jour</div><div class="kpi-val" id="k-ca">—</div><div class="kpi-sub">Chiffre d'affaires</div></div>
+        <div class="kpi">   <div class="kpi-lbl">Ventes</div>    <div class="kpi-val" id="k-v">—</div> <div class="kpi-sub">Transactions</div></div>
+        <div class="kpi">   <div class="kpi-lbl">Produits</div>  <div class="kpi-val" id="k-p">—</div> <div class="kpi-sub">En catalogue</div></div>
+        <div class="kpi">   <div class="kpi-lbl">Clients</div>   <div class="kpi-val" id="k-c">—</div> <div class="kpi-sub">Enregistrés</div></div>
+      </div>
+      <div class="dash-grid">
+        <div class="dash-card">
+          <div class="dc-hdr"><h4>Dernières ventes</h4><button class="btn btn-g sm" onclick="goSect('sales')">Voir tout</button></div>
+          <div id="d-sales"><p class="empty">Aucune vente.</p></div>
+        </div>
+        <div class="dash-card">
+          <div class="dc-hdr"><h4>Top produits</h4></div>
+          <div id="d-top"><p class="empty">Aucune donnée.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POS -->
+    <section id="s-pos" class="section active" style="padding:0">
+      <div class="pos-wrap">
+        <div class="pos-left">
+          <input class="pos-search" id="pos-srch" placeholder="🔍 Rechercher un produit..." oninput="renderPOS()"/>
+          <div class="prod-grid" id="pos-grid"><p class="empty">Ajoutez des produits d'abord.</p></div>
+        </div>
+        <div class="cart-side">
+          <div class="cart-hdr">
+            <h3>Panier <span class="badge" id="cart-cnt">0</span></h3>
+            <button class="btn btn-g sm" onclick="clearCart()">Vider</button>
+          </div>
+          <div class="cart-body" id="cart-items"><p class="empty">Panier vide</p></div>
+          <div class="cart-cli">
+            <div class="cart-cli-hdr">👤 Client (optionnel)</div>
+            <select id="cart-cli-sel" onchange="onCliSel()">
+              <option value="">+ Nouveau client</option>
+            </select>
+            <input id="cart-cli-nom" placeholder="Nom du client"/>
+            <input id="cart-cli-tel" placeholder="Téléphone (optionnel)"/>
+          </div>
+          <div class="cart-foot">
+            <div class="ct-row"><span>Sous-total</span><span id="cart-sub" style="font-family:var(--fm)">0</span></div>
+            <div class="ct-row big"><span>TOTAL</span><span id="cart-total" style="font-family:var(--fm)">0 FCFA</span></div>
+          </div>
+          <button class="checkout-btn" id="checkout-btn" onclick="processCheckout()">✓ Valider la vente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VENTE RAPIDE -->
+    <section id="s-quick" class="section">
+      <div class="qr-wrap">
+        <div>
+          <p style="font-size:.75rem;color:var(--txt2);text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:12px">Saisir le montant</p>
+          <div class="qr-disp" id="qr-disp">0</div>
+          <div class="qr-pad">
+            <button class="qr-key" onclick="qrK('7')">7</button><button class="qr-key" onclick="qrK('8')">8</button><button class="qr-key" onclick="qrK('9')">9</button>
+            <button class="qr-key" onclick="qrK('4')">4</button><button class="qr-key" onclick="qrK('5')">5</button><button class="qr-key" onclick="qrK('6')">6</button>
+            <button class="qr-key" onclick="qrK('1')">1</button><button class="qr-key" onclick="qrK('2')">2</button><button class="qr-key" onclick="qrK('3')">3</button>
+            <button class="qr-key" onclick="qrK('0')" style="grid-column:span 2">0</button>
+            <button class="qr-key del" onclick="qrDel()">⌫</button>
+          </div>
+          <button class="btn btn-p full" style="margin-bottom:8px" onclick="qrAdd()">+ Ajouter ligne</button>
+          <button class="btn btn-g full" onclick="qrReset()">🗑 Effacer tout</button>
+        </div>
+        <div class="qr-panel">
+          <div class="cart-hdr"><h3>Articles <span class="badge" id="qr-cnt">0</span></h3></div>
+          <div class="cart-body" id="qr-lines"><p class="empty">Aucun article</p></div>
+          <div class="cart-foot">
+            <div class="ct-row big"><span>TOTAL</span><span id="qr-total" style="font-family:var(--fm)">0 FCFA</span></div>
+          </div>
+          <button class="checkout-btn" onclick="qrCheckout()">⚡ Vente rapide →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUITS -->
+    <section id="s-products" class="section">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+        <input class="pos-search" id="prod-srch" oninput="renderProducts()" placeholder="🔍 Rechercher produit..." style="width:260px;margin:0"/>
+        <button class="btn btn-p" onclick="openProdModal()">+ Nouveau produit</button>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>Produit</th><th>Prix</th><th>Stock</th><th>Actions</th></tr></thead>
+          <tbody id="prod-tbody"><tr><td colspan="4" class="empty">Aucun produit.</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- STOCK -->
+    <section id="s-stock" class="section">
+      <div style="background:var(--warn-bg);border:1px solid rgba(243,156,18,.25);border-radius:var(--rsm);padding:13px 18px;margin-bottom:18px;display:flex;align-items:center;gap:10px">
+        ⚠️ <strong id="stk-alert-cnt">0</strong> produits en alerte de stock
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+        <input class="pos-search" id="stk-srch" oninput="renderStock()" placeholder="🔍 Rechercher..." style="width:260px;margin:0"/>
+        <button class="btn btn-p" onclick="openProdModal()">+ Ajouter produit</button>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>Produit</th><th>Stock actuel</th><th>Niveau</th><th>Seuil</th><th>Actions</th></tr></thead>
+          <tbody id="stk-tbody"><tr><td colspan="5" class="empty">Aucun produit.</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CLIENTS -->
+    <section id="s-clients" class="section">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+        <input class="pos-search" id="cli-srch" oninput="renderClients()" placeholder="🔍 Rechercher client..." style="width:260px;margin:0"/>
+        <button class="btn btn-p" onclick="openCliModal()">+ Nouveau client</button>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>Nom</th><th>Téléphone</th><th>Achats</th><th>Total</th><th>Actions</th></tr></thead>
+          <tbody id="cli-tbody"><tr><td colspan="5" class="empty">Aucun client.</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- VENTES -->
+    <section id="s-sales" class="section">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+        <input class="pos-search" id="sale-srch" oninput="renderSales()" placeholder="🔍 Rechercher vente..." style="width:260px;margin:0"/>
+        <span id="sale-total-lbl" style="font-weight:700;color:var(--acc);font-family:var(--fm)"></span>
+      </div>
+      <div class="s-tabs">
+        <button class="s-tab on" onclick="setSaleTab('all',this)">Toutes <span class="badge" id="tc-all">0</span></button>
+        <button class="s-tab" onclick="setSaleTab('done',this)">✅ Validées <span class="badge" id="tc-done">0</span></button>
+        <button class="s-tab" onclick="setSaleTab('cancelled',this)">🚫 Annulées <span class="badge badge-err" id="tc-can">0</span></button>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>#</th><th>Client</th><th>Total</th><th>Date</th><th>Actions</th></tr></thead>
+          <tbody id="sale-tbody"><tr><td colspan="5" class="empty">Aucune vente.</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PARAMÈTRES -->
+    <section id="s-settings" class="section">
+      <div class="sett-grid">
+        <div class="sc">
+          <h4>🎨 Thème & Devise</h4>
+          <div class="fg"><label>Thème de l'interface</label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn btn-g sm" onclick="setTheme('dark')">🌑 Sombre</button>
+              <button class="btn btn-g sm" onclick="setTheme('light')">☀️ Clair</button>
+              <button class="btn btn-g sm" onclick="setTheme('neon')">⚡ Néon</button>
+              <button class="btn btn-g sm" onclick="setTheme('ocean')">🌊 Océan</button>
+            </div>
+          </div>
+          <div class="fg"><label>Devise</label>
+            <select id="s-devise">
+              <option value="FCFA">FCFA (XOF)</option><option value="XAF">FCFA (XAF)</option>
+              <option value="USD">USD $</option><option value="EUR">EUR €</option>
+              <option value="MAD">MAD</option><option value="GHS">GHS ₵</option>
+              <option value="NGN">NGN ₦</option><option value="KES">KES</option>
+            </select>
+          </div>
+          <div class="fg"><label>Message d'accueil</label><input id="s-welcome" placeholder="Bienvenue !"/></div>
+          <div class="fg"><label>Message WhatsApp post-vente</label>
+            <textarea id="s-wa-msg" rows="3" style="resize:vertical" placeholder="Merci {nom} pour votre achat de {total} ! 😊"></textarea>
+            <small style="color:var(--txt3);font-size:.73rem">Variables: {nom} {total} {commerce}</small>
+          </div>
+          <button class="btn btn-p" onclick="saveWelcome()">💾 Sauvegarder</button>
+        </div>
+        <div class="sc">
+          <h4>🏪 Informations commerce</h4>
+          <div class="fg"><label>Nom du commerce</label><input id="s-nom"/></div>
+          <div class="fg"><label>Propriétaire</label><input id="s-proprio"/></div>
+          <div class="fg"><label>Ville</label><input id="s-ville"/></div>
+          <div class="fg"><label>Téléphone</label><input type="tel" id="s-tel"/></div>
+          <button class="btn btn-p" onclick="saveMerchantInfo()">Mettre à jour</button>
+        </div>
+        <div class="sc">
+          <h4>🔐 PIN Propriétaire</h4>
+          <p style="font-size:.83rem;color:var(--txt2);margin-bottom:14px">Protège Dashboard, Stock, Clients, Ventes et Paramètres. Laissez vide pour désactiver.</p>
+          <div class="fg"><label>Rôle utilisateur actuel</label>
+            <div style="background:var(--surf2);border-radius:var(--rsm);padding:10px 13px;font-size:.85rem">
+              <span id="s-role-display">—</span>
+            </div>
+          </div>
+          <div class="fg"><label>Nouveau PIN (4 chiffres)</label><input type="password" id="s-pin-new" maxlength="4" placeholder="••••" inputmode="numeric"/></div>
+          <div class="fg"><label>Confirmer PIN</label><input type="password" id="s-pin-conf" maxlength="4" placeholder="••••" inputmode="numeric"/></div>
+          <button class="btn btn-p" onclick="savePin()">🔐 Enregistrer PIN</button>
+        </div>
+        <div class="sc">
+          <h4>🔥 Firebase & Temps Réel</h4>
+          <div id="fb-status-card" style="background:var(--surf2);border-radius:var(--rsm);padding:14px;margin-bottom:14px;font-size:.83rem;line-height:1.8">
+            Chargement...
+          </div>
+          <button class="btn btn-g sm" onclick="openFirebaseConfig()">⚙️ Configurer Firebase</button>
+        </div>
+        <div class="sc" style="grid-column:1/-1">
+          <h4>⚠️ Zone dangereuse</h4>
+          <p style="font-size:.83rem;color:var(--txt2);margin-bottom:14px">Actions irréversibles — suppression définitive des données Firestore.</p>
+          <button class="btn btn-d" onclick="confirmReset()">🗑️ Réinitialiser toutes les données</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     MODALS
+     ════════════════════════════════════════════════ -->
+
+<!-- PRODUIT -->
+<div id="mo-prod" class="mo hidden" onclick="closeMoOv(event,'mo-prod')">
+  <div class="modal">
+    <div class="mo-hdr"><h3 id="mo-prod-ttl">Nouveau produit</h3><button class="mo-cls" onclick="closeMo('mo-prod')">✕</button></div>
+    <div class="mo-body">
+      <div class="fg"><label>Nom *</label><input id="p-nom" placeholder="Ex: Thiéboudienne"/></div>
+      <div class="fr">
+        <div class="fg"><label>Prix *</label><input type="number" id="p-prix" placeholder="0" min="0"/></div>
+        <div class="fg"><label>Stock (vide=∞)</label><input type="number" id="p-stk" placeholder="∞" min="0"/></div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label>Catégorie</label><input id="p-cat" placeholder="Ex: Plats, Boissons..."/></div>
+        <div class="fg"><label>Seuil alerte</label><input type="number" id="p-seuil" value="5" min="0"/></div>
+      </div>
+    </div>
+    <div class="mo-ftr"><button class="btn btn-g" onclick="closeMo('mo-prod')">Annuler</button><button class="btn btn-p" onclick="saveProd()">Enregistrer</button></div>
+  </div>
+</div>
+
+<!-- STOCK AJUSTEMENT -->
+<div id="mo-stk" class="mo hidden" onclick="closeMoOv(event,'mo-stk')">
+  <div class="modal" style="max-width:460px">
+    <div class="mo-hdr"><h3>🏭 Ajustement stock</h3><button class="mo-cls" onclick="closeMo('mo-stk')">✕</button></div>
+    <div class="mo-body">
+      <div style="background:var(--surf2);border-radius:var(--rsm);padding:11px 14px;margin-bottom:14px;font-size:.85rem">
+        <strong id="stk-pname">—</strong> — Stock actuel : <strong id="stk-cur" style="color:var(--acc);font-family:var(--fm)">—</strong>
+      </div>
+      <div class="fg"><label>Opération</label>
+        <div style="display:flex;gap:8px">
+          <button class="pfmt-btn on" id="stk-op-add" onclick="setStkOp('add',this)">➕ Entrée</button>
+          <button class="pfmt-btn"    id="stk-op-sub" onclick="setStkOp('sub',this)">➖ Sortie</button>
+          <button class="pfmt-btn"    id="stk-op-set" onclick="setStkOp('set',this)">🎯 Définir</button>
+        </div>
+      </div>
+      <div class="fg"><label id="stk-qty-lbl">Quantité à ajouter</label><input type="number" id="stk-qty" placeholder="0" min="0" style="font-size:1.2rem;text-align:center;font-family:var(--fm)"/></div>
+      <div class="fg"><label>Motif (optionnel)</label><input id="stk-reason" placeholder="Ex: Livraison reçue..."/></div>
+    </div>
+    <div class="mo-ftr"><button class="btn btn-g" onclick="closeMo('mo-stk')">Annuler</button><button class="btn btn-p" onclick="applyStk()">✅ Appliquer</button></div>
+  </div>
+</div>
+
+<!-- CLIENT -->
+<div id="mo-cli" class="mo hidden" onclick="closeMoOv(event,'mo-cli')">
+  <div class="modal" style="max-width:440px">
+    <div class="mo-hdr"><h3 id="mo-cli-ttl">Nouveau client</h3><button class="mo-cls" onclick="closeMo('mo-cli')">✕</button></div>
+    <div class="mo-body">
+      <div class="fg"><label>Nom complet *</label><input id="c-nom" placeholder="Nom du client"/></div>
+      <div class="fg"><label>Téléphone</label><input type="tel" id="c-tel" placeholder="Ex: 2250700000000"/></div>
+    </div>
+    <div class="mo-ftr"><button class="btn btn-g" onclick="closeMo('mo-cli')">Annuler</button><button class="btn btn-p" onclick="saveCli()">Enregistrer</button></div>
+  </div>
+</div>
+
+<!-- FACTURE + IMPRESSION THERMIQUE -->
+<div id="mo-inv" class="mo hidden" onclick="closeMoOv(event,'mo-inv')">
+  <div class="modal wide">
+    <div class="mo-hdr"><h3>🧾 Ticket de caisse</h3><button class="mo-cls" onclick="closeMo('mo-inv')">✕</button></div>
+    <div class="mo-body">
+      <div class="print-fmt-btns">
+        <button class="pfmt-btn on" id="fmt-80" onclick="setPrintFmt(80,this)">80mm (POS-80C)</button>
+        <button class="pfmt-btn"    id="fmt-58" onclick="setPrintFmt(58,this)">58mm</button>
+      </div>
+      <div id="ticket-preview"></div>
+    </div>
+    <div class="mo-ftr">
+      <button class="btn btn-g" onclick="closeMo('mo-inv')">Fermer</button>
+      <button class="btn btn-g" onclick="printBrowser()">🖨️ Imprimer (nav.)</button>
+      <button class="btn btn-p" id="ble-print-btn" onclick="openBLEPrint()">📡 Bluetooth BLE</button>
+    </div>
+  </div>
+</div>
+
+<!-- BLE PRINT -->
+<div id="mo-ble" class="mo hidden" onclick="closeMoOv(event,'mo-ble')">
+  <div class="modal" style="max-width:460px">
+    <div class="mo-hdr"><h3>📡 Impression Bluetooth</h3><button class="mo-cls" onclick="closeMo('mo-ble')">✕</button></div>
+    <div class="mo-body">
+      <div id="ble-status-box" class="ble-status searching">
+        <span>🔍</span><span id="ble-status-txt">Prêt à scanner...</span>
+      </div>
+      <div class="print-fmt-btns" style="margin-bottom:18px">
+        <button class="pfmt-btn on" id="ble-fmt-80" onclick="setBLEFmt(80,this)">80mm</button>
+        <button class="pfmt-btn"    id="ble-fmt-58" onclick="setBLEFmt(58,this)">58mm</button>
+      </div>
+      <div id="ble-printer-info" style="display:none;background:var(--surf2);border-radius:var(--rsm);padding:11px 14px;margin-bottom:14px;font-size:.83rem">
+        <div id="ble-printer-name" style="font-weight:700">—</div>
+        <div style="color:var(--txt2);font-size:.75rem">Imprimante connectée</div>
+      </div>
+      <p style="font-size:.78rem;color:var(--txt2);line-height:1.7">
+        Compatible : POS-80C, EPSON TM-P20, Star SM-L200, ZJ-5802 et toutes imprimantes ESC/POS BLE.<br/>
+        ⚠️ Requiert Chrome/Edge sur Android ou Desktop.
+      </p>
+    </div>
+    <div class="mo-ftr">
+      <button class="btn btn-g" onclick="closeMo('mo-ble')">Fermer</button>
+      <button class="btn btn-g" id="ble-disco-btn" onclick="bleDisco()" style="display:none">🔌 Déconnecter</button>
+      <button class="btn btn-p" id="ble-scan-btn" onclick="bleScan()">🔍 Scanner</button>
+      <button class="btn btn-p" id="ble-print-do-btn" onclick="blePrint()" style="display:none">🖨️ Imprimer</button>
+    </div>
+  </div>
+</div>
+
+<!-- PIN -->
+<div id="mo-pin" class="mo hidden">
+  <div class="modal" style="max-width:340px;text-align:center">
+    <div class="mo-hdr"><h3>🔐 PIN Requis</h3><button class="mo-cls" onclick="closePIN()">✕</button></div>
+    <div class="mo-body">
+      <p style="color:var(--txt2);font-size:.85rem;margin-bottom:18px">Entrez le PIN propriétaire pour accéder à cette section.</p>
+      <div class="pin-dots" id="pin-dots">
+        <div class="pin-dot"></div><div class="pin-dot"></div>
+        <div class="pin-dot"></div><div class="pin-dot"></div>
+      </div>
+      <div class="pin-pad">
+        <button class="pin-key" onclick="pinK('1')">1</button><button class="pin-key" onclick="pinK('2')">2</button><button class="pin-key" onclick="pinK('3')">3</button>
+        <button class="pin-key" onclick="pinK('4')">4</button><button class="pin-key" onclick="pinK('5')">5</button><button class="pin-key" onclick="pinK('6')">6</button>
+        <button class="pin-key" onclick="pinK('7')">7</button><button class="pin-key" onclick="pinK('8')">8</button><button class="pin-key" onclick="pinK('9')">9</button>
+        <button class="pin-key" onclick="pinK('del')" style="color:var(--err)">⌫</button>
+        <button class="pin-key" onclick="pinK('0')">0</button>
+        <button class="pin-key" onclick="closePIN()" style="font-size:.75rem;color:var(--txt2)">Ann.</button>
+      </div>
+      <p id="pin-err" style="color:var(--err);font-size:.8rem;margin-top:12px;min-height:18px"></p>
+    </div>
+  </div>
+</div>
+
+<!-- FIREBASE CONFIG -->
+<div id="mo-fbcfg" class="mo hidden" onclick="closeMoOv(event,'mo-fbcfg')">
+  <div class="modal">
+    <div class="mo-hdr"><h3>🔥 Configuration Firebase</h3><button class="mo-cls" onclick="closeMo('mo-fbcfg')">✕</button></div>
+    <div class="mo-body">
+      <div style="background:var(--warn-bg);border:1px solid rgba(243,156,18,.25);border-radius:var(--rsm);padding:12px 14px;margin-bottom:16px;font-size:.82rem;line-height:1.7">
+        <strong>Pour le temps réel multi-appareils :</strong><br/>
+        1. Créez un projet sur <a href="https://console.firebase.google.com" target="_blank">firebase.google.com</a><br/>
+        2. Activez <strong>Authentication</strong> (Email/Password)<br/>
+        3. Créez une base <strong>Firestore</strong><br/>
+        4. Copiez votre config ci-dessous
+      </div>
+      <div class="fg"><label>API Key</label><input id="fb-apikey" placeholder="AIzaSy..."/></div>
+      <div class="fg"><label>Auth Domain</label><input id="fb-authdomain" placeholder="projet.firebaseapp.com"/></div>
+      <div class="fg"><label>Project ID</label><input id="fb-projectid" placeholder="mon-projet-id"/></div>
+      <div class="fg"><label>Storage Bucket</label><input id="fb-bucket" placeholder="projet.appspot.com"/></div>
+      <div class="fg"><label>Messaging Sender ID</label><input id="fb-senderid" placeholder="123456789"/></div>
+      <div class="fg"><label>App ID</label><input id="fb-appid" placeholder="1:123456789:web:abc..."/></div>
+    </div>
+    <div class="mo-ftr">
+      <button class="btn btn-g" onclick="closeMo('mo-fbcfg')">Annuler</button>
+      <button class="btn btn-g" onclick="clearFBConfig()">🗑 Effacer</button>
+      <button class="btn btn-p" onclick="saveFBConfig()">💾 Sauvegarder & Connecter</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     ADMIN DEV PANEL (triple-clic logo)
+     ════════════════════════════════════════════════ -->
+<div id="dev-panel" class="dev-panel" style="display:none">
+  <div class="dev-topbar">
+    <div class="logo-mark sm">🌐</div>
+    <h2>Administration Développeur</h2>
+    <span class="dev-badge">DEV ONLY</span>
+    <button class="btn btn-g sm" onclick="closeDevPanel()">✕ Fermer</button>
+  </div>
+  <div class="dev-tabs">
+    <button class="dev-tab on" onclick="devTab('overview',this)">Vue globale</button>
+    <button class="dev-tab" onclick="devTab('subscriptions',this)">Abonnements</button>
+    <button class="dev-tab" onclick="devTab('pins',this)">PINs</button>
+    <button class="dev-tab" onclick="devTab('notifications',this)">Notifications</button>
+  </div>
+  <div class="dev-content">
+    <!-- OVERVIEW -->
+    <div id="dev-overview" class="dev-sect on">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px" id="dev-kpis">
+        <div class="kpi"><div class="kpi-lbl">Total commerces</div><div class="kpi-val" id="dev-k-total">—</div></div>
+        <div class="kpi"><div class="kpi-lbl">Actifs</div><div class="kpi-val" id="dev-k-active" style="color:var(--ok)">—</div></div>
+        <div class="kpi"><div class="kpi-lbl">Essai gratuit</div><div class="kpi-val" id="dev-k-trial" style="color:var(--warn)">—</div></div>
+        <div class="kpi"><div class="kpi-lbl">Expirés</div><div class="kpi-val" id="dev-k-exp" style="color:var(--err)">—</div></div>
+      </div>
+      <div class="dev-card">
+        <div class="dev-card-hdr"><h3>Commerces récents</h3><button class="btn btn-g sm" onclick="devLoadCommerces()">🔄 Actualiser</button></div>
+        <div class="dev-card-body">
+          <div class="tbl-wrap"><table class="tbl" id="dev-recent-tbl">
+            <thead><tr><th>Commerce</th><th>Ville</th><th>Créé le</th><th>Abonnement</th></tr></thead>
+            <tbody id="dev-recent-body"><tr><td colspan="4" class="empty">Chargement...</td></tr></tbody>
+          </table></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBSCRIPTIONS -->
+    <div id="dev-subscriptions" class="dev-sect">
+      <div class="dev-card">
+        <div class="dev-card-hdr"><h3>Gestion des abonnements</h3><button class="btn btn-g sm" onclick="devLoadCommerces()">🔄 Actualiser</button></div>
+        <div class="dev-card-body">
+          <div class="tbl-wrap"><table class="tbl">
+            <thead><tr><th>Commerce</th><th>Abonnement</th><th>Expiration</th><th>Actions</th></tr></thead>
+            <tbody id="dev-sub-body"><tr><td colspan="4" class="empty">Chargement...</td></tr></tbody>
+          </table></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PINS -->
+    <div id="dev-pins" class="dev-sect">
+      <div class="dev-card">
+        <div class="dev-card-hdr"><h3>Gestion des PINs commerces</h3><button class="btn btn-g sm" onclick="devLoadCommerces()">🔄 Actualiser</button></div>
+        <div class="dev-card-body">
+          <div class="tbl-wrap"><table class="tbl">
+            <thead><tr><th>Commerce</th><th>PIN</th><th>Action</th></tr></thead>
+            <tbody id="dev-pin-body"><tr><td colspan="3" class="empty">Chargement...</td></tr></tbody>
+          </table></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTIFICATIONS ADMIN -->
+    <div id="dev-notifications" class="dev-sect">
+      <div class="dev-card" style="margin-bottom:18px">
+        <div class="dev-card-hdr"><h3>Envoyer une notification</h3></div>
+        <div class="dev-card-body">
+          <div class="fg"><label>Commerce cible</label>
+            <select id="dev-notif-target" style="background:var(--surf2);border:1px solid var(--bdr2);color:var(--txt);padding:10px 12px;border-radius:var(--rsm);width:100%">
+              <option value="all">📢 Tous les commerces</option>
+            </select>
+          </div>
+          <div class="fg"><label>Type</label>
+            <select id="dev-notif-type" style="background:var(--surf2);border:1px solid var(--bdr2);color:var(--txt);padding:10px 12px;border-radius:var(--rsm);width:100%">
+              <option value="expiry_7">⏰ Expiration dans 7 jours</option>
+              <option value="expiry_3">🔴 Expiration dans 3 jours</option>
+              <option value="expiry_0">🚨 Abonnement expiré</option>
+              <option value="custom">✏️ Message personnalisé</option>
+            </select>
+          </div>
+          <div class="fg" id="dev-notif-custom-fg" style="display:none"><label>Message personnalisé</label><textarea id="dev-notif-custom" rows="3" style="background:var(--surf2);border:1px solid var(--bdr2);color:var(--txt);padding:10px 12px;border-radius:var(--rsm);width:100%;resize:vertical" placeholder="Votre message..."></textarea></div>
+          <button class="btn btn-p" onclick="devSendNotif()">📤 Envoyer la notification</button>
+        </div>
+      </div>
+      <div class="dev-card">
+        <div class="dev-card-hdr"><h3>Vérification expiration automatique</h3></div>
+        <div class="dev-card-body">
+          <p style="font-size:.83rem;color:var(--txt2);margin-bottom:14px">Lance la vérification de tous les abonnements et envoie les notifications d'expiration.</p>
+          <button class="btn btn-p" onclick="devCheckExpiry()">🔍 Vérifier toutes les expirations</button>
+          <div id="dev-expiry-result" style="margin-top:12px;font-size:.82rem"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DEV PIN OVERLAY -->
+<div id="dev-pin-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:3000;align-items:center;justify-content:center">
+  <div class="modal" style="max-width:320px;text-align:center">
+    <div class="mo-hdr"><h3>🔑 Accès Développeur</h3><button class="mo-cls" onclick="closeDevPIN()">✕</button></div>
+    <div class="mo-body">
+      <p style="color:var(--txt2);font-size:.83rem;margin-bottom:18px">Triple-clic détecté. Entrez le PIN développeur.</p>
+      <div class="pin-dots" id="dev-pin-dots">
+        <div class="pin-dot"></div><div class="pin-dot"></div>
+        <div class="pin-dot"></div><div class="pin-dot"></div>
+      </div>
+      <div class="pin-pad">
+        <button class="pin-key" onclick="devPinK('1')">1</button><button class="pin-key" onclick="devPinK('2')">2</button><button class="pin-key" onclick="devPinK('3')">3</button>
+        <button class="pin-key" onclick="devPinK('4')">4</button><button class="pin-key" onclick="devPinK('5')">5</button><button class="pin-key" onclick="devPinK('6')">6</button>
+        <button class="pin-key" onclick="devPinK('7')">7</button><button class="pin-key" onclick="devPinK('8')">8</button><button class="pin-key" onclick="devPinK('9')">9</button>
+        <button class="pin-key" onclick="devPinK('del')" style="color:var(--err)">⌫</button>
+        <button class="pin-key" onclick="devPinK('0')">0</button>
+        <button class="pin-key" onclick="closeDevPIN()" style="font-size:.73rem;color:var(--txt2)">Ann.</button>
+      </div>
+      <p id="dev-pin-err" style="color:var(--err);font-size:.8rem;margin-top:10px;min-height:16px"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SCRIPT MODULE (Firebase + App Logic)
+     ════════════════════════════════════════════════ -->
+<script type="module">
+// ── Firebase SDK ────────────────────────────────────────────────
+import { initializeApp, getApps } from
+  'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+  signOut, onAuthStateChanged, updateProfile }
+  from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+import { getFirestore, collection, doc, getDoc, getDocs, setDoc, addDoc,
+  updateDoc, deleteDoc, onSnapshot, query, where, orderBy, limit,
+  serverTimestamp, runTransaction, writeBatch, enableIndexedDbPersistence }
+  from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+// ════════════════════════════════════════════════════════════════
+// 🔥 CONFIG FIREBASE — lue depuis localStorage ou firebase-config.js
+// ════════════════════════════════════════════════════════════════
+const DEV_PIN = '2580'; // ← Changez ce PIN avant production
+
+function getStoredFBConfig() {
+  try {
+    const raw = localStorage.getItem('ds_fb_config');
+    return raw ? JSON.parse(raw) : null;
+  } catch { return null; }
+}
+
+function isFBConfigValid(cfg) {
+  if (!cfg) return false;
+  return ['apiKey','authDomain','projectId','storageBucket','messagingSenderId','appId']
+    .every(k => cfg[k] && !cfg[k].startsWith('VOTRE_'));
+}
+
+// ── Init Firebase ─────────────────────────────────────────────
+let auth, db, FB_READY = false;
+const storedCfg = getStoredFBConfig();
+
+if (isFBConfigValid(storedCfg)) {
+  try {
+    const app = getApps().length ? getApps()[0] : initializeApp(storedCfg);
+    auth = getAuth(app);
+    db   = getFirestore(app);
+    FB_READY = true;
+    enableIndexedDbPersistence(db).catch(e => {
+      if (e.code !== 'failed-precondition') console.warn('Offline cache:', e.code);
+    });
+  } catch(e) { console.error('Firebase init:', e); }
+}
+
+window._FB = { auth, db, ready: FB_READY };
+
+// ════════════════════════════════════════════════════════════════
+// GLOBAL STATE
+// ════════════════════════════════════════════════════════════════
+let currentUser = null, currentCommerce = null;
+let cart = [], qrLines = [], qrInput = '0';
+let unsubs = [];
+let pinBuf = '', pinPending = null, pinUnlocked = false;
+let devPinBuf = '';
+let editProdId = null, editCliId = null, stkProdId = null, stkOp = 'add';
+let saleTab = 'all', printFmt = 80, bleFmt = 80;
+let bleDevice = null, bleChar = null;
+let _currentInvoiceSale = null;
+let _devCommerces = [];
+let _logoClicks = 0, _logoTimer = null;
+const ROLES = { caissier:0, gerant:1, admin:2 };
+
+// ════════════════════════════════════════════════════════════════
+// UTILITIES
+// ════════════════════════════════════════════════════════════════
+const $  = id => document.getElementById(id);
+const qs = s => document.querySelector(s);
+const uid = () => Math.random().toString(36).slice(2,10);
+
+function fmtMoney(n, dev) {
+  dev = dev || getDevise();
+  return Math.round(n||0).toLocaleString('fr-FR') + ' ' + dev;
+}
+function fmtDate(d) {
+  const dt = d?.toDate ? d.toDate() : new Date(d||0);
+  return dt.toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric',
+    hour:'2-digit',minute:'2-digit'});
+}
+function fmtDateShort(d) {
+  const dt = d?.toDate ? d.toDate() : new Date(d||0);
+  return dt.toLocaleDateString('fr-FR',{day:'2-digit',month:'short'});
+}
+function getDevise() { return currentCommerce?.devise || 'FCFA'; }
+function getRoleN() { return ROLES[currentUser?.role] ?? 0; }
+function canAccess(minRole) { return getRoleN() >= ROLES[minRole]; }
+
+function toast(msg, type='info', dur=3200) {
+  const t = document.createElement('div');
+  t.className = `toast toast-${type}`;
+  const icons = { ok:'✅', err:'❌', info:'ℹ️', warn:'⚠️' };
+  t.innerHTML = `<span class="toast-ico">${icons[type]||'ℹ️'}</span><span>${msg}</span>`;
+  document.body.appendChild(t);
+  requestAnimationFrame(() => t.classList.add('show'));
+  setTimeout(() => { t.classList.remove('show'); setTimeout(()=>t.remove(),400); }, dur);
+}
+
+// ════════════════════════════════════════════════════════════════
+// PAGE / SECTION NAV
+// ════════════════════════════════════════════════════════════════
+function goPage(id) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  $(id)?.classList.add('active');
+}
+window.goPage = goPage;
+
+const PROTECTED = { dashboard:'gerant', stock:'gerant', clients:'gerant',
+                    sales:'gerant', settings:'admin' };
+
+function goSect(s, force=false) {
+  if (!force && PROTECTED[s]) {
+    const minRole = PROTECTED[s];
+    if (!canAccess(minRole)) {
+      if (!currentCommerce?.ownerPin) {
+        // No PIN set — allow if no pin configured
+        pinUnlocked = true;
+      }
+      if (!pinUnlocked) {
+        pinPending = s; openPIN(); return;
+      }
+    }
+  }
+  document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(x=>x.classList.remove('on'));
+  $('s-'+s)?.classList.add('active');
+  document.querySelector(`.ni[data-s="${s}"]`)?.classList.add('on');
+  const titles = { dashboard:'Dashboard', pos:'Point de Vente', quick:'Vente Rapide',
+    products:'Produits', stock:'Gestion Stock', clients:'Clients',
+    sales:'Mes Ventes', settings:'Paramètres' };
+  if ($('tb-title')) $('tb-title').textContent = titles[s] || s;
+  const renders = { dashboard:renderDashboard, pos:renderPOS, products:renderProducts,
+    stock:renderStock, clients:renderClients, sales:renderSales, settings:loadSettings };
+  renders[s]?.();
+  // Mobile sidebar close
+  $('sidebar')?.classList.remove('mob-open');
+}
+window.goSect = goSect;
+
+// ════════════════════════════════════════════════════════════════
+// FIREBASE AUTH
+// ════════════════════════════════════════════════════════════════
+async function doRegister() {
+  const nom    = $('reg-nom').value.trim();
+  const proprio= $('reg-proprio').value.trim();
+  const ville  = $('reg-ville').value.trim();
+  const tel    = $('reg-tel').value.trim();
+  const pwd    = $('reg-pwd').value;
+  const pwd2   = $('reg-pwd2').value;
+  const type   = $('reg-type').value;
+  $('reg-err').classList.add('hidden');
+  if (!nom||!proprio||!ville||!tel||!pwd) { showErr('reg-err','Tous les champs sont requis.'); return; }
+  if (pwd !== pwd2) { showErr('reg-err','Les mots de passe ne correspondent pas.'); return; }
+  if (!FB_READY) { showErr('reg-err','Firebase non configuré. Cliquez ⚙️ Configurer Firebase.'); return; }
+  const email = tel.replace(/\D/g,'')+'@ds.local';
+  const btn = $('reg-btn'); btn.disabled=true; btn.textContent='⏳ Création...';
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, pwd);
+    await updateProfile(cred.user, { displayName: proprio });
+    const cid = doc(collection(db,'commerces')).id;
+    const trialEnd = new Date(Date.now() + 30*86400000);
+    await setDoc(doc(db,'commerces',cid), {
+      nom, proprio, ville, type, telephone:tel, devise:'FCFA',
+      welcomeMsg:'Bienvenue chez '+nom+' !',
+      waMsg:'Merci {nom} pour votre achat de {total} ! 😊',
+      abonnement:'trial', trialEnd, ownerPin:'',
+      createdAt: serverTimestamp()
+    });
+    await setDoc(doc(db,'users',cred.user.uid), {
+      nom:proprio, commerceId:cid, role:'admin', telephone:tel,
+      createdAt: serverTimestamp()
+    });
+  } catch(e) {
+    const msg = e.code==='auth/email-already-in-use'
+      ? 'Ce numéro est déjà utilisé. Connectez-vous.'
+      : e.message;
+    showErr('reg-err', msg);
+    btn.disabled=false; btn.textContent='Créer mon commerce →';
+  }
+}
+window.doRegister = doRegister;
+
+async function doLogin() {
+  const tel  = $('login-tel').value.trim();
+  const pwd  = $('login-pwd').value;
+  $('login-err').classList.add('hidden');
+  if (!tel||!pwd) { showErr('login-err','Téléphone et mot de passe requis.'); return; }
+  if (!FB_READY) { showErr('login-err','Firebase non configuré. Cliquez sur Configurer Firebase.'); return; }
+  const email = tel.replace(/\D/g,'')+'@ds.local';
+  const btn = $('login-btn'); btn.disabled=true; btn.textContent='⏳ Connexion...';
+  try {
+    await signInWithEmailAndPassword(auth, email, pwd);
+  } catch(e) {
+    showErr('login-err','Identifiants incorrects. Vérifiez votre numéro et mot de passe.');
+    btn.disabled=false; btn.textContent='Se connecter →';
+  }
+}
+window.doLogin = doLogin;
+
+function showErr(id, msg) {
+  const el = $(id); if (!el) return;
+  el.textContent = msg; el.classList.remove('hidden');
+}
+
+function demoLogin() {
+  currentUser = { uid:'demo', nom:'Démo Admin', role:'admin', commerceId:'demo' };
+  currentCommerce = {
+    id:'demo', nom:'Boutique Démo', proprio:'Admin Démo', ville:'Dakar',
+    devise:'FCFA', abonnement:'trial', ownerPin:'',
+    welcomeMsg:'Bienvenue dans la démo !',
+    waMsg:'Merci {nom} pour votre achat de {total} ! 😊',
+    trialEnd: new Date(Date.now()+29*86400000)
+  };
+  _demoInit();
+  updateRTChip('demo');
+  initAppUI();
+  goPage('page-app');
+  goSect('pos', true);
+  toast('🎉 Mode démo actif — données locales uniquement','info',4000);
+}
+window.demoLogin = demoLogin;
+
+function _demoInit() {
+  window._D = {
+    products:[
+      {id:'p1',nom:'Café express',prix:500,stock:50,categorie:'Boisson',seuilAlerte:10,commerceId:'demo'},
+      {id:'p2',nom:'Thiéboudienne',prix:2500,stock:20,categorie:'Plat',seuilAlerte:5,commerceId:'demo'},
+      {id:'p3',nom:'Jus de bissap',prix:800,stock:3,categorie:'Boisson',seuilAlerte:5,commerceId:'demo'},
+      {id:'p4',nom:'Attiéké poisson',prix:1500,stock:15,categorie:'Plat',seuilAlerte:5,commerceId:'demo'},
+      {id:'p5',nom:'Eau minérale',prix:300,stock:100,categorie:'Boisson',seuilAlerte:20,commerceId:'demo'},
+    ],
+    clients:[
+      {id:'c1',nom:'Aminata Diallo',telephone:'221701234567',commerceId:'demo'},
+      {id:'c2',nom:'Kofi Mensah',telephone:'233551234567',commerceId:'demo'},
+    ],
+    sales:[],
+    notifs:[{id:'n1',type:'stock_low',message:'⚠️ Stock faible : Jus de bissap (3 restants)',lu:false,createdAt:new Date()}]
+  };
+}
+
+// AUTH STATE LISTENER
+if (FB_READY) {
+  onAuthStateChanged(auth, async user => {
+    if (user) {
+      try {
+        const uSnap = await getDoc(doc(db,'users',user.uid));
+        if (!uSnap.exists()) { await signOut(auth); goPage('page-landing'); return; }
+        currentUser = { uid:user.uid, ...uSnap.data() };
+        const cSnap = await getDoc(doc(db,'commerces',currentUser.commerceId));
+        if (!cSnap.exists()) { await signOut(auth); goPage('page-landing'); return; }
+        currentCommerce = { id:currentUser.commerceId, ...cSnap.data() };
+        cleanUnsubs();
+        setupRT();
+        initAppUI();
+        goPage('page-app');
+        goSect('pos', true);
+        checkExpiryBanner();
+        toast('👋 Connecté — '+(currentCommerce.nom||'Commerce'),'ok');
+      } catch(e) { console.error(e); goPage('page-landing'); }
+    } else {
+      if (currentUser?.uid !== 'demo') {
+        cleanUnsubs();
+        currentUser = null; currentCommerce = null; cart = [];
+        goPage('page-landing');
+      }
+    }
+  });
+}
+
+async function doLogout() {
+  if (!confirm('Se déconnecter ?')) return;
+  cleanUnsubs(); pinUnlocked = false;
+  if (FB_READY && currentUser?.uid !== 'demo') await signOut(auth);
+  currentUser = null; currentCommerce = null; cart = [];
+  goPage('page-landing');
+}
+window.doLogout = doLogout;
+
+// ════════════════════════════════════════════════════════════════
+// REAL-TIME LISTENERS (onSnapshot)
+// ════════════════════════════════════════════════════════════════
+function cleanUnsubs() { unsubs.forEach(u=>u()); unsubs=[]; }
+function isDemo() { return currentUser?.uid === 'demo'; }
+
+function getP()  { return isDemo() ? (window._D?.products||[]) : (window._FBP||[]); }
+function getS()  { return isDemo() ? (window._D?.sales||[])    : (window._FBS||[]); }
+function getC()  { return isDemo() ? (window._D?.clients||[])  : (window._FBC||[]); }
+function getN()  { return isDemo() ? (window._D?.notifs||[])   : (window._FBN||[]); }
+
+function setupRT() {
+  if (isDemo() || !FB_READY) return;
+  const cid = currentCommerce.id;
+  updateRTChip('connecting');
+
+  // PRODUITS
+  const pQ = query(collection(db,'produits'), where('commerceId','==',cid));
+  unsubs.push(onSnapshot(pQ, s => {
+    window._FBP = s.docs.map(d=>({id:d.id,...d.data()}));
+    renderPOS(); renderProducts(); renderStock();
+    refreshDashboard();
+  }, e => { updateRTChip('error'); console.error(e); }));
+
+  // VENTES
+  const vQ = query(collection(db,'ventes'), where('commerceId','==',cid), orderBy('date','desc'), limit(300));
+  unsubs.push(onSnapshot(vQ, s => {
+    window._FBS = s.docs.map(d=>({id:d.id,...d.data()}));
+    renderSales(); refreshDashboard();
+  }, e => console.error(e)));
+
+  // CLIENTS
+  const cQ = query(collection(db,'clients'), where('commerceId','==',cid));
+  unsubs.push(onSnapshot(cQ, s => {
+    window._FBC = s.docs.map(d=>({id:d.id,...d.data()}));
+    renderClients(); fillCliSel();
+    refreshDashboard();
+  }, e => console.error(e)));
+
+  // NOTIFICATIONS
+  const nQ = query(collection(db,'notifications'), where('commerceId','==',cid),
+    where('lu','==',false), orderBy('createdAt','desc'), limit(50));
+  unsubs.push(onSnapshot(nQ, s => {
+    window._FBN = s.docs.map(d=>({id:d.id,...d.data()}));
+    updateNotifBadge(); renderNotifs();
+    refreshDashboard();
+  }, e => console.error(e)));
+
+  // COMMERCE (abonnement en temps réel)
+  unsubs.push(onSnapshot(doc(db,'commerces',cid), s => {
+    if (s.exists()) {
+      Object.assign(currentCommerce, s.data());
+      updateLicBadge();
+      checkExpiryBanner();
+    }
+  }, e => console.error(e)));
+
+  updateRTChip('live');
+}
+
+function updateRTChip(state) {
+  const chip = $('rt-chip'), txt = $('rt-chip-txt'), anim = $('rt-anim');
+  const banner = $('rt-banner'), banMsg = $('rt-banner-msg');
+  if (!chip) return;
+  chip.className = 'rt-chip';
+  if (anim) anim.style.display = 'none';
+  banner?.classList.remove('show');
+  if (state==='live') {
+    chip.classList.add('live'); if(txt) txt.textContent='⚡ Temps réel';
+    if(anim){ anim.style.display='block'; }
+  } else if (state==='demo') {
+    chip.classList.add('cfg'); if(txt) txt.textContent='🎭 Démo local';
+  } else if (state==='connecting') {
+    chip.classList.add('cfg'); if(txt) txt.textContent='🔄 Connexion...';
+    if(banner){ banner.classList.add('show','cfg'); if(banMsg) banMsg.textContent='Connexion à Firebase...'; }
+  } else if (state==='nocfg') {
+    chip.classList.add('dead'); if(txt) txt.textContent='⚙️ Config requise';
+    if(banner){ banner.classList.add('show','cfg'); if(banMsg) banMsg.textContent='Firebase non configuré — mode local. Cliquez pour configurer.'; }
+  } else {
+    chip.classList.add('dead'); if(txt) txt.textContent='📴 Local';
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// APP UI INIT
+// ════════════════════════════════════════════════════════════════
+function initAppUI() {
+  const m = currentCommerce, u = currentUser;
+  if (!m||!u) return;
+  if ($('sb-cname')) $('sb-cname').textContent = m.nom||'Commerce';
+  if ($('cb-name'))  $('cb-name').textContent  = m.nom||'Commerce';
+  if ($('mm-name'))  $('mm-name').textContent  = u.nom||'Utilisateur';
+  if ($('mm-role'))  $('mm-role').textContent  = {admin:'Propriétaire',gerant:'Gérant',caissier:'Caissier'}[u.role]||u.role||'—';
+  if ($('mm-av'))    $('mm-av').textContent    = (u.nom||'U')[0].toUpperCase();
+  if ($('w-date'))   $('w-date').textContent   = new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  if ($('w-msg'))    $('w-msg').textContent    = m.welcomeMsg||'Bienvenue !';
+  // Sidebar selon rôle
+  buildSidebarForRole(u.role);
+  updateLicBadge();
+  if (!FB_READY) updateRTChip('nocfg');
+  setTheme(localStorage.getItem('ds_theme')||'dark');
+  updateNotifBadge();
+}
+
+function buildSidebarForRole(role) {
+  // Caissier : visible = pos, quick, products, sales
+  // Gérant : tout sauf settings
+  // Admin : tout
+  const hidden = {
+    caissier: ['dashboard','stock','clients','settings'],
+    gerant: ['settings'],
+    admin: []
+  }[role] || [];
+  document.querySelectorAll('.ni[data-s]').forEach(btn => {
+    const s = btn.dataset.s;
+    btn.style.display = hidden.includes(s) ? 'none' : '';
+  });
+  // Groupes
+  const grp = $('grp-gestion');
+  if (grp) grp.style.display = role==='caissier' ? 'none' : '';
+}
+
+function updateLicBadge() {
+  const m = currentCommerce; if (!m) return;
+  const badge = $('lic-badge'), txt = $('lic-txt');
+  if (!badge||!txt) return;
+  const ab = m.abonnement;
+  badge.className = 'lic-badge';
+  if (ab==='active') { txt.textContent='Licence active'; }
+  else if (ab==='trial') {
+    const daysLeft = Math.max(0,Math.ceil((new Date(m.trialEnd?.seconds?m.trialEnd.toDate():m.trialEnd||0)-Date.now())/(86400000)));
+    txt.textContent=`Essai — ${daysLeft}j restants`;
+    if(daysLeft<=7) badge.classList.add('warn');
+  } else {
+    txt.textContent='Licence expirée'; badge.classList.add('exp');
+  }
+}
+
+function checkExpiryBanner() {
+  const m = currentCommerce; if (!m) return;
+  const ab = m.abonnement;
+  if (ab==='trial') {
+    const daysLeft = Math.max(0,Math.ceil((new Date(m.trialEnd?.seconds?m.trialEnd.toDate():m.trialEnd||0)-Date.now())/(86400000)));
+    if (daysLeft<=3) toast(`⚠️ Votre essai expire dans ${daysLeft} jour(s) !`,'warn',6000);
+  } else if (ab==='expired') {
+    toast('🔴 Votre licence a expiré. Contactez l\'administrateur.','err',8000);
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// DASHBOARD
+// ════════════════════════════════════════════════════════════════
+function renderDashboard() {
+  const sales = getS(), prods = getP(), clients = getC(), dev = getDevise();
+  const today = new Date().toDateString();
+  const todayS = sales.filter(s=>{
+    const d = s.date?.toDate?s.date.toDate():new Date(s.date||0);
+    return d.toDateString()===today && s.statut!=='cancelled';
+  });
+  const ca = todayS.reduce((a,s)=>a+(s.total||0),0);
+  const lowS = prods.filter(p=>p.stock!==null&&p.stock!==undefined&&p.stock<=(p.seuilAlerte||5));
+  if ($('k-ca')) $('k-ca').textContent = fmtMoney(ca,dev);
+  if ($('k-v'))  $('k-v').textContent  = todayS.length;
+  if ($('k-p'))  $('k-p').textContent  = prods.length;
+  if ($('k-c'))  $('k-c').textContent  = clients.length;
+  // Dernières ventes
+  const ds = $('d-sales');
+  if (ds) {
+    const last = sales.slice(0,5);
+    ds.innerHTML = last.length ? last.map(s=>`
+      <div class="sale-row">
+        <div><strong>${s.clientNom||'—'}</strong>
+          <div style="font-size:.73rem;color:var(--txt2)">${fmtDateShort(s.date)}</div>
+        </div>
+        <strong style="color:var(--acc);font-family:var(--fm)">${fmtMoney(s.total,dev)}</strong>
+      </div>`).join('') : '<p class="empty">Aucune vente.</p>';
+  }
+  // Top produits
+  const dt = $('d-top');
+  if (dt) {
+    const cnt={};
+    sales.forEach(s=>(s.items||[]).forEach(i=>{cnt[i.nom]=(cnt[i.nom]||0)+i.qty;}));
+    const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1]).slice(0,5);
+    dt.innerHTML = top.length ? top.map(([n,q])=>`
+      <div class="sale-row"><span>${n}</span>
+      <strong style="color:var(--acc);font-family:var(--fm)">${q}×</strong></div>`).join('')
+      : '<p class="empty">Pas encore de ventes.</p>';
+  }
+  // Low stock
+  const lsp = $('low-stock-panel');
+  if (lsp) {
+    lsp.style.display = lowS.length?'block':'none';
+    lsp.innerHTML = lowS.length ? `
+      <div style="padding:12px 16px;border-bottom:1px solid var(--bdr);font-weight:700;font-size:.85rem">
+        ⚠️ ${lowS.length} produit(s) en alerte stock
+      </div>` +
+      lowS.map(p=>`<div style="display:flex;justify-content:space-between;padding:9px 16px;border-bottom:1px solid var(--bdr);font-size:.83rem">
+        <span>${p.nom}</span>
+        <span style="color:${p.stock===0?'var(--err)':'var(--warn)'};font-family:var(--fm);font-weight:700">
+          ${p.stock===0?'Rupture':p.stock+' restants'}
+        </span></div>`).join('') : '';
+  }
+  // Notifs
+  renderNotifs();
+}
+
+function refreshDashboard() {
+  if ($('s-dashboard')?.classList.contains('active')) renderDashboard();
+}
+
+function renderNotifs() {
+  const notifs = getN();
+  const panel = $('notif-panel'), list = $('notif-list');
+  if (!panel||!list) return;
+  panel.style.display = notifs.length?'block':'none';
+  if ($('notif-cnt')) $('notif-cnt').textContent = notifs.length;
+  list.innerHTML = notifs.length ? notifs.map(n=>`
+    <div class="np-item" onclick="markNotifRead('${n.id}')">
+      <span class="np-ico">${n.type==='stock_low'?'📦':'🔔'}</span>
+      <div><div class="np-msg">${n.message}</div>
+        <div class="np-time">${fmtDate(n.createdAt)}</div>
+      </div>
+    </div>`).join('') : '<p class="empty">Aucune notification.</p>';
+}
+
+function updateNotifBadge() {
+  const n = getN().length, b = $('notif-badge');
+  if (!b) return;
+  b.textContent = n;
+  b.classList.toggle('hidden', n===0);
+}
+
+async function markNotifRead(id) {
+  if (isDemo()) {
+    window._D.notifs = window._D.notifs.filter(n=>n.id!==id);
+    updateNotifBadge(); renderNotifs(); return;
+  }
+  try { await updateDoc(doc(db,'notifications',id),{lu:true}); } catch(e){}
+}
+window.markNotifRead = markNotifRead;
+
+async function clearNotifs() {
+  if (isDemo()) { window._D.notifs=[]; updateNotifBadge(); renderNotifs(); return; }
+  const batch = writeBatch(db);
+  getN().forEach(n=>batch.update(doc(db,'notifications',n.id),{lu:true}));
+  await batch.commit().catch(()=>{});
+}
+window.clearNotifs = clearNotifs;
+
+// ════════════════════════════════════════════════════════════════
+// PRODUITS
+// ════════════════════════════════════════════════════════════════
+function openProdModal(p=null) {
+  editProdId = p?.id||null;
+  if ($('mo-prod-ttl')) $('mo-prod-ttl').textContent = p?'Modifier le produit':'Nouveau produit';
+  if ($('p-nom'))   $('p-nom').value   = p?.nom||'';
+  if ($('p-prix'))  $('p-prix').value  = p?.prix||'';
+  if ($('p-stk'))   $('p-stk').value   = p?.stock??'';
+  if ($('p-cat'))   $('p-cat').value   = p?.categorie||'';
+  if ($('p-seuil')) $('p-seuil').value = p?.seuilAlerte??5;
+  $('mo-prod')?.classList.remove('hidden');
+}
+window.openProdModal = openProdModal;
+
+async function saveProd() {
+  const nom   = $('p-nom')?.value.trim();
+  const prix  = parseFloat($('p-prix')?.value||0);
+  const stkV  = $('p-stk')?.value;
+  const stock = stkV!==''&&stkV!==null&&stkV!==undefined ? parseInt(stkV) : null;
+  const cat   = $('p-cat')?.value.trim();
+  const seuil = parseInt($('p-seuil')?.value)||5;
+  if (!nom||isNaN(prix)||prix<0) { toast('Nom et prix obligatoires','err'); return; }
+  const data = {nom,prix,stock,categorie:cat,seuilAlerte:seuil,commerceId:currentCommerce.id};
+  try {
+    if (isDemo()) {
+      if (editProdId) { const i=window._D.products.findIndex(x=>x.id===editProdId); if(i>=0) window._D.products[i]={...window._D.products[i],...data}; }
+      else window._D.products.push({id:'p'+uid(),...data});
+      renderPOS();renderProducts();renderStock();
+    } else {
+      if (editProdId) await updateDoc(doc(db,'produits',editProdId),data);
+      else { data.createdAt=serverTimestamp(); await addDoc(collection(db,'produits'),data); }
+    }
+    toast(editProdId?'Produit mis à jour':'Produit ajouté','ok');
+    closeMo('mo-prod');
+  } catch(e){toast('Erreur: '+e.message,'err');}
+}
+window.saveProd = saveProd;
+
+async function delProd(id) {
+  if (!confirm('Supprimer ce produit ?')) return;
+  try {
+    if (isDemo()) { window._D.products=window._D.products.filter(p=>p.id!==id); renderProducts();renderPOS();renderStock(); }
+    else await deleteDoc(doc(db,'produits',id));
+    toast('Produit supprimé','ok');
+  } catch(e){toast('Erreur','err');}
+}
+window.delProd = delProd;
+
+const CAT_ICO = {boisson:'🥤',plat:'🍽️',dessert:'🍰',pain:'🥖',viande:'🥩',
+  poisson:'🐟',légume:'🥦',électronique:'📱',vêtement:'👕',médicament:'💊',chambre:'🛏️'};
+
+function getIco(cat) {
+  const k = Object.keys(CAT_ICO).find(k=>(cat||'').toLowerCase().includes(k));
+  return k?CAT_ICO[k]:'📦';
+}
+
+function renderProducts() {
+  if (!currentCommerce) return;
+  const q=($('prod-srch')?.value||'').toLowerCase();
+  const f=getP().filter(p=>p.nom.toLowerCase().includes(q));
+  const dev=getDevise();
+  $('prod-tbody').innerHTML = f.length ? f.map(p=>{
+    const sb = p.stock===null||p.stock===undefined?`<span class="sbdg s-ok">∞</span>`:
+      p.stock===0?`<span class="sbdg s-zero">Rupture</span>`:
+      p.stock<=(p.seuilAlerte||5)?`<span class="sbdg s-low">${p.stock}</span>`:
+      `<span class="sbdg s-ok">${p.stock}</span>`;
+    return `<tr>
+      <td><strong>${p.nom}</strong>${p.categorie?`<br/><small style="color:var(--txt3)">${p.categorie}</small>`:''}</td>
+      <td><strong style="color:var(--acc);font-family:var(--fm)">${fmtMoney(p.prix,dev)}</strong></td>
+      <td>${sb}</td>
+      <td><div class="acts">
+        <button class="tbtn" onclick='openProdModal(${JSON.stringify(p).replace(/'/g,"&#39;")})'>✏️</button>
+        <button class="tbtn d" onclick="delProd('${p.id}')">🗑️</button>
+      </div></td></tr>`;
+  }).join('') : '<tr><td colspan="4" class="empty">Aucun produit.</td></tr>';
+}
+window.renderProducts = renderProducts;
+
+// ════════════════════════════════════════════════════════════════
+// STOCK
+// ════════════════════════════════════════════════════════════════
+function renderStock() {
+  if (!currentCommerce) return;
+  const prods=getP();
+  const low=prods.filter(p=>p.stock!==null&&p.stock!==undefined&&p.stock<=(p.seuilAlerte||5));
+  if ($('stk-alert-cnt')) $('stk-alert-cnt').textContent = low.length;
+  const q=($('stk-srch')?.value||'').toLowerCase();
+  const f=prods.filter(p=>p.nom.toLowerCase().includes(q));
+  $('stk-tbody').innerHTML = f.length ? f.map(p=>{
+    const inf = p.stock===null||p.stock===undefined;
+    const pct = inf?100:Math.min(100,Math.round(p.stock/Math.max(1,(p.seuilAlerte||5)*3)*100));
+    const cls = inf?'ok':p.stock===0?'zero':p.stock<=(p.seuilAlerte||5)?'low':'ok';
+    return `<tr>
+      <td><strong>${p.nom}</strong>${p.categorie?`<br/><small style="color:var(--txt3)">${p.categorie}</small>`:''}</td>
+      <td><span class="sbdg s-${cls}">${inf?'∞':p.stock}</span></td>
+      <td><div class="stk-bar"><div class="stk-fill ${cls}" style="width:${pct}%"></div></div></td>
+      <td style="font-size:.78rem;color:var(--txt2);font-family:var(--fm)">${p.seuilAlerte||5}</td>
+      <td><div class="acts">
+        <button class="tbtn ok" onclick="openStkAdj('${p.id}')">⚙️ Ajuster</button>
+        <button class="tbtn" onclick='openProdModal(${JSON.stringify(p).replace(/'/g,"&#39;")})'>✏️</button>
+      </div></td></tr>`;
+  }).join('') : '<tr><td colspan="5" class="empty">Aucun produit.</td></tr>';
+}
+window.renderStock = renderStock;
+
+function openStkAdj(pid) {
+  const p=getP().find(x=>x.id===pid); if (!p) return;
+  stkProdId=pid;
+  if ($('stk-pname')) $('stk-pname').textContent = p.nom;
+  if ($('stk-cur'))   $('stk-cur').textContent   = p.stock===null||p.stock===undefined?'∞':p.stock;
+  if ($('stk-qty'))   $('stk-qty').value='';
+  if ($('stk-reason'))$('stk-reason').value='';
+  stkOp='add';
+  ['add','sub','set'].forEach(o=>{ const b=$('stk-op-'+o); if(b){b.classList.remove('on');} });
+  $('stk-op-add')?.classList.add('on');
+  $('mo-stk')?.classList.remove('hidden');
+}
+window.openStkAdj = openStkAdj;
+
+function setStkOp(op,btn) {
+  stkOp=op;
+  ['add','sub','set'].forEach(o=>$('stk-op-'+o)?.classList.remove('on'));
+  btn?.classList.add('on');
+  const lbl={add:'Quantité à ajouter',sub:'Quantité à retirer',set:'Nouvelle valeur'};
+  if ($('stk-qty-lbl')) $('stk-qty-lbl').textContent=lbl[op];
+}
+window.setStkOp = setStkOp;
+
+async function applyStk() {
+  const qty=parseInt($('stk-qty')?.value||'0');
+  if (isNaN(qty)||qty<0) { toast('Quantité invalide','err'); return; }
+  const p=getP().find(x=>x.id===stkProdId); if (!p) return;
+  let ns = stkOp==='add'?(p.stock||0)+qty : stkOp==='sub'?Math.max(0,(p.stock||0)-qty):qty;
+  try {
+    if (isDemo()) {
+      const i=window._D.products.findIndex(x=>x.id===stkProdId);
+      if (i>=0) window._D.products[i].stock=ns;
+      renderStock();
+    } else {
+      await updateDoc(doc(db,'produits',stkProdId),{stock:ns});
+      if (ns<=(p.seuilAlerte||5)) await addDoc(collection(db,'notifications'),{
+        commerceId:currentCommerce.id,type:'stock_low',
+        message:`⚠️ Stock faible : ${p.nom} (${ns} restant${ns>1?'s':''})`,
+        lu:false,createdAt:serverTimestamp()
+      });
+    }
+    toast('Stock mis à jour','ok'); closeMo('mo-stk');
+  } catch(e){toast('Erreur: '+e.message,'err');}
+}
+window.applyStk = applyStk;
+
+// ════════════════════════════════════════════════════════════════
+// POS
+// ════════════════════════════════════════════════════════════════
+function renderPOS() {
+  if (!currentCommerce) return;
+  const q=($('pos-srch')?.value||'').toLowerCase();
+  const f=getP().filter(p=>p.nom.toLowerCase().includes(q));
+  const dev=getDevise();
+  const grid=$('pos-grid'); if (!grid) return;
+  grid.innerHTML = f.length ? f.map(p=>{
+    const oos=p.stock!==null&&p.stock!==undefined&&p.stock===0;
+    const low=p.stock!==null&&p.stock!==undefined&&p.stock>0&&p.stock<=(p.seuilAlerte||5);
+    return `<div class="pcard${oos?' oos':''}" data-pid="${p.id}">
+      <div class="pcard-ico">${getIco(p.categorie)}</div>
+      <div class="pcard-name">${p.nom}</div>
+      <div class="pcard-price">${fmtMoney(p.prix,dev)}</div>
+      ${p.stock!==null&&p.stock!==undefined?`<div class="pcard-stk${low?' low':''}${oos?' out':''}">${oos?'Rupture':p.stock+' en stock'}</div>`:''}
+    </div>`;
+  }).join('') : '<p class="empty" style="padding:30px">Aucun produit. Ajoutez-en dans Produits.</p>';
+  grid.onclick = e => {
+    const c=e.target.closest('.pcard');
+    if (c&&!c.classList.contains('oos')) addToCart(c.dataset.pid);
+  };
+  fillCliSel();
+}
+window.renderPOS = renderPOS;
+
+function fillCliSel() {
+  const sel=$('cart-cli-sel'); if (!sel) return;
+  const v=sel.value;
+  sel.innerHTML='<option value="">+ Nouveau client</option>'+
+    getC().map(c=>`<option value="${c.id}">${c.nom}</option>`).join('');
+  sel.value=v;
+}
+
+function onCliSel() {
+  const cid=$('cart-cli-sel')?.value;
+  if (!cid) { $('cart-cli-nom').value=''; $('cart-cli-tel').value=''; return; }
+  const c=getC().find(x=>x.id===cid);
+  if (c) { $('cart-cli-nom').value=c.nom; $('cart-cli-tel').value=c.telephone||''; }
+}
+window.onCliSel = onCliSel;
+
+function addToCart(pid) {
+  const p=getP().find(x=>x.id===pid); if (!p) return;
+  const ex=cart.find(i=>i.pid===pid);
+  if (ex) ex.qty++; else cart.push({pid,nom:p.nom,prix:p.prix,qty:1});
+  renderCart();
+  const card=document.querySelector(`.pcard[data-pid="${pid}"]`);
+  card?.classList.add('added'); setTimeout(()=>card?.classList.remove('added'),400);
+}
+
+function updQty(pid,d) {
+  const i=cart.find(x=>x.pid===pid); if (!i) return;
+  i.qty=Math.max(0,i.qty+d);
+  if (i.qty===0) cart=cart.filter(x=>x.pid!==pid);
+  renderCart();
+}
+window.updQty = updQty;
+
+function rmItem(pid) { cart=cart.filter(i=>i.pid!==pid); renderCart(); }
+window.rmItem = rmItem;
+
+function clearCart() {
+  cart=[];
+  if ($('cart-cli-nom')) $('cart-cli-nom').value='';
+  if ($('cart-cli-tel')) $('cart-cli-tel').value='';
+  if ($('cart-cli-sel')) $('cart-cli-sel').value='';
+  renderCart();
+}
+window.clearCart = clearCart;
+
+function cartTotal() { return cart.reduce((s,i)=>s+i.prix*i.qty,0); }
+
+function renderCart() {
+  const dev=getDevise(), tot=cartTotal();
+  if ($('cart-cnt'))   $('cart-cnt').textContent   = cart.reduce((s,i)=>s+i.qty,0);
+  if ($('cart-sub'))   $('cart-sub').textContent   = fmtMoney(tot,dev);
+  if ($('cart-total')) $('cart-total').textContent = fmtMoney(tot,dev);
+  const list=$('cart-items'); if (!list) return;
+  if (!cart.length) { list.innerHTML='<p class="empty">Panier vide</p>'; return; }
+  list.innerHTML=cart.map(i=>`
+    <div class="ci">
+      <span class="ci-name">${i.nom}</span>
+      <div class="ci-ctrl">
+        <button class="ci-btn" onclick="updQty('${i.pid}',-1)">−</button>
+        <span class="ci-qty">${i.qty}</span>
+        <button class="ci-btn" onclick="updQty('${i.pid}',1)">+</button>
+      </div>
+      <span class="ci-price">${fmtMoney(i.prix*i.qty,dev)}</span>
+      <button class="ci-rm" onclick="rmItem('${i.pid}')">✕</button>
+    </div>`).join('');
+}
+
+// ════════════════════════════════════════════════════════════════
+// CHECKOUT — Transaction Firestore atomique
+// ════════════════════════════════════════════════════════════════
+async function processCheckout() {
+  if (!cart.length) { toast('Panier vide','err'); return; }
+  const cliNom = ($('cart-cli-nom')?.value||'').trim()||'Client';
+  const cliTel = ($('cart-cli-tel')?.value||'').trim().replace(/\D/g,'');
+  const cliSel = $('cart-cli-sel')?.value||'';
+  const total  = cartTotal();
+  const dev    = getDevise();
+  const btn    = $('checkout-btn');
+  if (btn) { btn.disabled=true; btn.textContent='⏳ Traitement...'; }
+  try {
+    let clientId=cliSel, saleId;
+    if (isDemo()) {
+      if (cliNom!=='Client'&&!cliSel) {
+        const nc={id:'c'+uid(),nom:cliNom,telephone:cliTel,commerceId:'demo'};
+        window._D.clients.push(nc); clientId=nc.id;
+      }
+      cart.forEach(item=>{
+        const p=window._D.products.find(x=>x.id===item.pid);
+        if (p&&p.stock!==null&&p.stock!==undefined) p.stock=Math.max(0,p.stock-item.qty);
+      });
+      const sale={id:'s'+uid(),commerceId:'demo',items:cart.map(i=>({...i})),
+        total,clientNom:cliNom,clientId,clientTel:cliTel,statut:'done',date:new Date()};
+      window._D.sales.unshift(sale); saleId=sale.id;
+      _currentInvoiceSale=sale;
+    } else {
+      const cid=currentCommerce.id;
+      // Créer client si nouveau
+      if (cliNom!=='Client'&&!cliSel) {
+        const r=doc(collection(db,'clients'));
+        await setDoc(r,{nom:cliNom,telephone:cliTel,commerceId:cid,createdAt:serverTimestamp()});
+        clientId=r.id;
+      } else if (cliSel) {
+        await updateDoc(doc(db,'clients',cliSel),{nom:cliNom,telephone:cliTel}).catch(()=>{});
+      }
+      // Transaction atomique stock + vente
+      const vRef=doc(collection(db,'ventes'));
+      saleId=vRef.id;
+      await runTransaction(db, async tx => {
+        const pRefs=cart.map(i=>doc(db,'produits',i.pid));
+        const pSnaps=await Promise.all(pRefs.map(r=>tx.get(r)));
+        pSnaps.forEach((snap,idx)=>{
+          if (!snap.exists()) return;
+          const cur=snap.data();
+          if (cur.stock!==null&&cur.stock!==undefined) {
+            tx.update(pRefs[idx],{stock:Math.max(0,(cur.stock||0)-cart[idx].qty)});
+          }
+        });
+        tx.set(vRef,{
+          commerceId:cid, items:cart.map(i=>({pid:i.pid,nom:i.nom,prix:i.prix,qty:i.qty})),
+          total, clientNom:cliNom, clientId, clientTel:cliTel,
+          statut:'done', date:serverTimestamp(), userId:currentUser.uid
+        });
+      });
+      // Notifs stock faible
+      for (const item of cart) {
+        const p=getP().find(x=>x.id===item.pid);
+        if (p&&p.stock!==null) {
+          const ns=Math.max(0,(p.stock||0)-item.qty);
+          if (ns<=(p.seuilAlerte||5)) {
+            await addDoc(collection(db,'notifications'),{
+              commerceId:cid,type:'stock_low',
+              message:`⚠️ Stock faible : ${p.nom} (${ns} restant${ns>1?'s':''})`,
+              lu:false,createdAt:serverTimestamp()
+            });
+          }
+        }
+      }
+      _currentInvoiceSale={id:saleId,items:[...cart],total,clientNom:cliNom,clientTel:cliTel,date:new Date(),statut:'done'};
+    }
+    toast(`✅ Vente de ${fmtMoney(total,dev)} enregistrée !`,'ok',4000);
+    // Proposer l'impression
+    openInvoice(_currentInvoiceSale);
+    clearCart();
+    refreshDashboard();
+  } catch(e) {
+    toast('Erreur: '+e.message,'err'); console.error(e);
+  } finally {
+    if (btn) { btn.disabled=false; btn.textContent='✓ Valider la vente'; }
+  }
+}
+window.processCheckout = processCheckout;
+
+// ════════════════════════════════════════════════════════════════
+// CLIENTS
+// ════════════════════════════════════════════════════════════════
+function openCliModal(c=null) {
+  editCliId=c?.id||null;
+  if ($('mo-cli-ttl')) $('mo-cli-ttl').textContent = c?'Modifier client':'Nouveau client';
+  if ($('c-nom')) $('c-nom').value=c?.nom||'';
+  if ($('c-tel')) $('c-tel').value=c?.telephone||'';
+  $('mo-cli')?.classList.remove('hidden');
+}
+window.openCliModal = openCliModal;
+
+async function saveCli() {
+  const nom=($('c-nom')?.value||'').trim();
+  const tel=($('c-tel')?.value||'').trim().replace(/\D/g,'');
+  if (!nom) { toast('Nom obligatoire','err'); return; }
+  const data={nom,telephone:tel,commerceId:currentCommerce.id};
+  try {
+    if (isDemo()) {
+      if (editCliId) { const i=window._D.clients.findIndex(x=>x.id===editCliId); if(i>=0) window._D.clients[i]={...window._D.clients[i],...data}; }
+      else window._D.clients.push({id:'c'+uid(),...data});
+      renderClients(); fillCliSel();
+    } else {
+      if (editCliId) await updateDoc(doc(db,'clients',editCliId),data);
+      else { data.createdAt=serverTimestamp(); await addDoc(collection(db,'clients'),data); }
+    }
+    toast(editCliId?'Client mis à jour':'Client ajouté','ok');
+    closeMo('mo-cli');
+  } catch(e){toast('Erreur','err');}
+}
+window.saveCli = saveCli;
+
+async function delCli(id) {
+  if (!confirm('Supprimer ce client ?')) return;
+  try {
+    if (isDemo()) { window._D.clients=window._D.clients.filter(c=>c.id!==id); renderClients(); }
+    else await deleteDoc(doc(db,'clients',id));
+    toast('Client supprimé','ok');
+  } catch(e){toast('Erreur','err');}
+}
+window.delCli = delCli;
+
+function renderClients() {
+  if (!currentCommerce) return;
+  const q=($('cli-srch')?.value||'').toLowerCase();
+  const f=getC().filter(c=>c.nom.toLowerCase().includes(q)||(c.telephone||'').includes(q));
+  const sales=getS(); const dev=getDevise();
+  $('cli-tbody').innerHTML = f.length ? f.map(c=>{
+    const cs=sales.filter(s=>s.clientId===c.id);
+    const tot=cs.reduce((s,v)=>s+(v.total||0),0);
+    return `<tr>
+      <td><strong>${c.nom}</strong></td>
+      <td style="font-family:var(--fm);font-size:.82rem">${c.telephone||'—'}</td>
+      <td>${cs.length}</td>
+      <td><strong style="color:var(--acc);font-family:var(--fm)">${fmtMoney(tot,dev)}</strong></td>
+      <td><div class="acts">
+        <button class="tbtn" onclick='openCliModal(${JSON.stringify(c).replace(/'/g,"&#39;")})'>✏️</button>
+        <button class="tbtn d" onclick="delCli('${c.id}')">🗑️</button>
+      </div></td></tr>`;
+  }).join('') : '<tr><td colspan="5" class="empty">Aucun client.</td></tr>';
+}
+window.renderClients = renderClients;
+
+// ════════════════════════════════════════════════════════════════
+// VENTES
+// ════════════════════════════════════════════════════════════════
+function setSaleTab(tab,btn) {
+  saleTab=tab;
+  document.querySelectorAll('.s-tab').forEach(b=>b.classList.remove('on'));
+  btn?.classList.add('on'); renderSales();
+}
+window.setSaleTab = setSaleTab;
+
+function renderSales() {
+  if (!currentCommerce) return;
+  const all=getS().sort((a,b)=>{
+    const da=a.date?.toDate?a.date.toDate():new Date(a.date||0);
+    const db2=b.date?.toDate?b.date.toDate():new Date(b.date||0);
+    return db2-da;
+  });
+  const dev=getDevise();
+  const q=($('sale-srch')?.value||'').toLowerCase();
+  const done=all.filter(s=>s.statut!=='cancelled');
+  const can=all.filter(s=>s.statut==='cancelled');
+  if ($('tc-all'))  $('tc-all').textContent  = all.length;
+  if ($('tc-done')) $('tc-done').textContent = done.length;
+  if ($('tc-can'))  $('tc-can').textContent  = can.length;
+  let pool=saleTab==='cancelled'?can:saleTab==='done'?done:all;
+  const f=q?pool.filter(s=>(s.clientNom||'').toLowerCase().includes(q)):pool;
+  const totV=f.filter(s=>s.statut!=='cancelled').reduce((s,v)=>s+(v.total||0),0);
+  if ($('sale-total-lbl')) $('sale-total-lbl').textContent='Total validé : '+fmtMoney(totV,dev);
+  $('sale-tbody').innerHTML = f.length ? f.map((s,i)=>{
+    const isC=s.statut==='cancelled';
+    const d=s.date?.toDate?s.date.toDate():new Date(s.date||0);
+    return `<tr${isC?' class="row-cancelled"':''}>
+      <td style="color:var(--txt3);font-size:.75rem;font-family:var(--fm)">${f.length-i}</td>
+      <td><strong>${s.clientNom||'—'}</strong></td>
+      <td><strong style="color:${isC?'var(--err)':'var(--acc)'};font-family:var(--fm)${isC?';text-decoration:line-through;opacity:.6':''}">${fmtMoney(s.total,dev)}</strong></td>
+      <td style="font-size:.78rem;color:var(--txt2)">${d.toLocaleDateString('fr-FR')}</td>
+      <td><div class="acts">
+        ${!isC?`<button class="tbtn" onclick="viewInvoice('${s.id}')">🧾</button>`:''}
+        ${isC?`<span class="cancel-badge">🚫 Annulée</span>`:`<button class="tbtn d" onclick="cancelSale('${s.id}')">🚫</button>`}
+      </div></td></tr>`;
+  }).join('') : `<tr><td colspan="5" class="empty">${saleTab==='cancelled'?'Aucune annulation.':'Aucune vente.'}</td></tr>`;
+}
+window.renderSales = renderSales;
+
+async function cancelSale(id) {
+  const motif=prompt('Motif d\'annulation :'); if (!motif) return;
+  try {
+    if (isDemo()) {
+      const s=window._D.sales.find(x=>x.id===id);
+      if (s) { s.statut='cancelled'; s.cancelReason=motif; }
+    } else {
+      await updateDoc(doc(db,'ventes',id),{statut:'cancelled',cancelReason:motif,cancelledAt:serverTimestamp()});
+    }
+    toast('Vente annulée','ok'); renderSales();
+  } catch(e){toast('Erreur','err');}
+}
+window.cancelSale = cancelSale;
+
+function viewInvoice(sid) {
+  const s=getS().find(x=>x.id===sid); if (!s) return;
+  openInvoice(s);
+}
+window.viewInvoice = viewInvoice;
+
+// ════════════════════════════════════════════════════════════════
+// TICKET / IMPRESSION THERMIQUE
+// ════════════════════════════════════════════════════════════════
+function openInvoice(sale) {
+  _currentInvoiceSale=sale;
+  setPrintFmt(printFmt, $('fmt-80'));
+  $('mo-inv')?.classList.remove('hidden');
+}
+
+function buildTicketHTML(sale, fmt) {
+  const dev=getDevise(), m=currentCommerce||{};
+  const d=sale.date?.toDate?sale.date.toDate():new Date(sale.date||0);
+  const w=fmt===58?32:46;
+  const line=(char='-')=>char.repeat(w);
+  const center=(s)=>{const pad=Math.max(0,Math.floor((w-s.length)/2)); return ' '.repeat(pad)+s;};
+  const row=(l,r)=>{
+    const gap=Math.max(1,w-l.length-r.length);
+    return l+' '.repeat(gap)+r;
+  };
+  const items=(sale.items||[]).map(i=>{
+    const n=i.nom.length>18?i.nom.slice(0,17)+'…':i.nom;
+    const p=fmtMoney(i.prix*i.qty,dev);
+    return row(`${i.qty}x ${n}`,p);
+  }).join('\n');
+  const txt=[
+    center('================================'),
+    center(m.nom||'COMMERCE'),
+    m.ville?center(m.ville):'',
+    m.telephone?center(m.telephone):'',
+    center('================================'),
+    center('TICKET DE CAISSE'),
+    '',
+    `Date  : ${d.toLocaleDateString('fr-FR')} ${d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}`,
+    `Réf   : DS-${(sale.id||'').slice(-8).toUpperCase()}`,
+    `Client: ${sale.clientNom||'—'}`,
+    line('-'),
+    'Article              Qté    Prix',
+    line('-'),
+    items,
+    line('-'),
+    row('TOTAL',fmtMoney(sale.total,dev)),
+    line('='),
+    '',
+    center('Merci pour votre achat !'),
+    center('Revenez bientôt 😊'),
+    center('Digitale Solution POS'),
+    '',
+  ].filter(x=>x!==undefined).join('\n');
+
+  return `<div class="ticket-preview${fmt===58?' w58':''}">
+    <pre style="font-family:var(--fm);white-space:pre-wrap;font-size:${fmt===58?'9':'11'}px;line-height:1.55">${txt}</pre>
+  </div>`;
+}
+
+function setPrintFmt(fmt, btn) {
+  printFmt=fmt;
+  ['fmt-80','fmt-58'].forEach(id=>$('pfmt-btn '+id));
+  document.querySelectorAll('.mo-body .pfmt-btn').forEach(b=>b.classList.remove('on'));
+  btn?.classList.add('on');
+  if (_currentInvoiceSale && $('ticket-preview')) {
+    $('ticket-preview').innerHTML=buildTicketHTML(_currentInvoiceSale,fmt);
+  }
+}
+window.setPrintFmt = setPrintFmt;
+
+function printBrowser() {
+  if (!_currentInvoiceSale) return;
+  const w=window.open('','_blank','width=400,height=600');
+  w.document.write(`<!DOCTYPE html><html><head><style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Courier New',monospace;padding:10px;background:#fff;color:#000}
+    pre{font-size:${printFmt===58?'10':'12'}px;white-space:pre-wrap;line-height:1.5}
+    @page{size:${printFmt}mm auto;margin:3mm}
+  </style></head><body><pre>${buildTicketTXT(_currentInvoiceSale)}</pre></body></html>`);
+  w.document.close(); w.focus(); w.print();
+}
+window.printBrowser = printBrowser;
+
+function buildTicketTXT(sale) {
+  const dev=getDevise(), m=currentCommerce||{};
+  const d=sale.date?.toDate?sale.date.toDate():new Date(sale.date||0);
+  const w=printFmt===58?32:46;
+  const line=c=>(c||'-').repeat(w);
+  const center=s=>{const p=Math.max(0,Math.floor((w-s.length)/2));return ' '.repeat(p)+s;};
+  const row=(l,r)=>{ const g=Math.max(1,w-l.length-r.length); return l+' '.repeat(g)+r; };
+  return [
+    center(m.nom||'COMMERCE'),
+    m.ville?center(m.ville):'',
+    m.telephone?center('Tel: '+m.telephone):'',
+    line('='),
+    center('TICKET DE CAISSE'),
+    `Date  : ${d.toLocaleDateString('fr-FR')} ${d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}`,
+    `Ref   : DS-${(sale.id||'').slice(-8).toUpperCase()}`,
+    `Client: ${sale.clientNom||'—'}`,
+    line('-'),
+    ...(sale.items||[]).map(i=>row(`${i.qty}x ${(i.nom||'').slice(0,20)}`,fmtMoney(i.prix*i.qty,dev))),
+    line('='),
+    row('TOTAL TTC',fmtMoney(sale.total,dev)),
+    line('='),
+    center(''),
+    center('Merci pour votre achat !'),
+    center('Digitale Solution POS'),
+  ].filter(x=>x).join('\n');
+}
+
+// ── BLE IMPRESSION ──────────────────────────────────────────────
+function setBLEFmt(fmt,btn) {
+  bleFmt=fmt;
+  ['ble-fmt-80','ble-fmt-58'].forEach(id=>$(id)?.classList.remove('on'));
+  btn?.classList.add('on');
+}
+window.setBLEFmt = setBLEFmt;
+
+function openBLEPrint() {
+  closeMo('mo-inv');
+  $('ble-status-box')?.classList.remove('connected','error'); 
+  $('ble-status-box')?.classList.add('searching');
+  if ($('ble-status-txt')) $('ble-status-txt').textContent='Prêt à scanner...';
+  $('ble-scan-btn')?.style.setProperty('display','inline-flex');
+  $('ble-print-do-btn')?.style.setProperty('display','none');
+  $('ble-disco-btn')?.style.setProperty('display','none');
+  $('ble-printer-info')?.style.setProperty('display','none');
+  $('mo-ble')?.classList.remove('hidden');
+}
+window.openBLEPrint = openBLEPrint;
+
+async function bleScan() {
+  if (!navigator.bluetooth) {
+    setBLEStatus('error','Web Bluetooth non supporté. Utilisez Chrome/Edge sur Android.');
+    return;
+  }
+  setBLEStatus('searching','Scan en cours...');
+  try {
+    bleDevice = await navigator.bluetooth.requestDevice({
+      filters:[
+        {namePrefix:'POS'},
+        {namePrefix:'Printer'},
+        {namePrefix:'RPP'},
+        {namePrefix:'ZJ'},
+        {namePrefix:'EPSON'},
+        {namePrefix:'Star'},
+      ],
+      optionalServices:['000018f0-0000-1000-8000-00805f9b34fb',
+        '49535343-fe7d-4ae5-8fa9-9fafd205e455',
+        'e7810a71-73ae-499d-8c15-faa9aef0c3f2']
+    });
+    setBLEStatus('searching','Connexion à '+bleDevice.name+'...');
+    const server = await bleDevice.gatt.connect();
+    // Try known printer services
+    const SERVICES = [
+      '000018f0-0000-1000-8000-00805f9b34fb',
+      '49535343-fe7d-4ae5-8fa9-9fafd205e455',
+      'e7810a71-73ae-499d-8c15-faa9aef0c3f2'
+    ];
+    const CHARS = [
+      '00002af1-0000-1000-8000-00805f9b34fb',
+      '49535343-8841-43f4-a8d4-ecbe34729bb3',
+      'bef8d6c9-9c21-4c9e-b632-bd58c1009f9f'
+    ];
+    let found = false;
+    for (const svcUUID of SERVICES) {
+      try {
+        const svc = await server.getPrimaryService(svcUUID);
+        for (const charUUID of CHARS) {
+          try {
+            bleChar = await svc.getCharacteristic(charUUID);
+            found = true; break;
+          } catch {}
+        }
+        if (found) break;
+      } catch {}
+    }
+    if (!found) {
+      // Try to enumerate all services
+      const services = await server.getPrimaryServices();
+      for (const svc of services) {
+        const chars = await svc.getCharacteristics().catch(()=>[]);
+        for (const ch of chars) {
+          if (ch.properties.write || ch.properties.writeWithoutResponse) {
+            bleChar = ch; found = true; break;
+          }
+        }
+        if (found) break;
+      }
+    }
+    if (!bleChar) throw new Error('Aucune caractéristique d\'écriture trouvée');
+    setBLEStatus('connected','Connecté à '+bleDevice.name);
+    if ($('ble-printer-name')) $('ble-printer-name').textContent = bleDevice.name||'Imprimante';
+    $('ble-printer-info')?.style.setProperty('display','block');
+    $('ble-scan-btn')?.style.setProperty('display','none');
+    $('ble-print-do-btn')?.style.setProperty('display','inline-flex');
+    $('ble-disco-btn')?.style.setProperty('display','inline-flex');
+    bleDevice.addEventListener('gattserverdisconnected',()=>{
+      bleChar=null; bleDevice=null;
+      setBLEStatus('searching','Imprimante déconnectée');
+      $('ble-scan-btn')?.style.setProperty('display','inline-flex');
+      $('ble-print-do-btn')?.style.setProperty('display','none');
+      $('ble-disco-btn')?.style.setProperty('display','none');
+    });
+  } catch(e) {
+    if (e.name!=='NotFoundError') setBLEStatus('error','Erreur: '+e.message);
+    else setBLEStatus('searching','Scan annulé.');
+  }
+}
+window.bleScan = bleScan;
+
+async function blePrint() {
+  if (!bleChar||!_currentInvoiceSale) { toast('Non connecté','err'); return; }
+  setBLEStatus('searching','Impression...');
+  try {
+    const data = buildESCPOS(_currentInvoiceSale, bleFmt);
+    const CHUNK = 200;
+    for (let i=0; i<data.length; i+=CHUNK) {
+      await bleChar.writeValueWithoutResponse(data.slice(i,i+CHUNK));
+      await new Promise(r=>setTimeout(r,50));
+    }
+    setBLEStatus('connected','Impression terminée ✓');
+    toast('✅ Ticket imprimé','ok');
+    setTimeout(()=>closeMo('mo-ble'),1500);
+  } catch(e){ setBLEStatus('error','Erreur impression: '+e.message); }
+}
+window.blePrint = blePrint;
+
+async function bleDisco() {
+  if (bleDevice?.gatt?.connected) await bleDevice.gatt.disconnect();
+  bleChar=null; bleDevice=null;
+  setBLEStatus('searching','Déconnecté');
+  $('ble-scan-btn')?.style.setProperty('display','inline-flex');
+  $('ble-print-do-btn')?.style.setProperty('display','none');
+  $('ble-disco-btn')?.style.setProperty('display','none');
+  $('ble-printer-info')?.style.setProperty('display','none');
+}
+window.bleDisco = bleDisco;
+
+function setBLEStatus(type,msg) {
+  const box=$('ble-status-box'), txt=$('ble-status-txt');
+  if (!box||!txt) return;
+  box.className='ble-status '+type;
+  txt.textContent=msg;
+  const icons={searching:'🔍',connected:'✅',error:'❌'};
+  const ico=box.querySelector('span:first-child');
+  if (ico) ico.textContent=icons[type]||'•';
+}
+
+function buildESCPOS(sale, fmt) {
+  const ESC=0x1B, GS=0x1D;
+  const dev=getDevise(), m=currentCommerce||{};
+  const d=sale.date?.toDate?sale.date.toDate():new Date(sale.date||0);
+  const charW=fmt===58?32:46;
+  const enc=s=>new TextEncoder().encode(s);
+
+  const center=s=>{ const p=Math.max(0,Math.floor((charW-s.length)/2)); return ' '.repeat(p)+s; };
+  const row=(l,r)=>{ const g=Math.max(1,charW-l.length-r.length); return l+' '.repeat(g)+r; };
+  const line=(c='-')=>(c||'-').repeat(charW);
+
+  const txt=[
+    center(m.nom||'COMMERCE'),
+    center(m.ville||''),
+    center(m.telephone?'Tel: '+m.telephone:''),
+    line('='),
+    center('TICKET DE CAISSE'),
+    `Date  : ${d.toLocaleDateString('fr-FR')} ${d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}`,
+    `Ref   : DS-${(sale.id||'').slice(-8).toUpperCase()}`,
+    `Client: ${sale.clientNom||'—'}`,
+    line('-'),
+    ...(sale.items||[]).map(i=>row(`${i.qty}x ${(i.nom||'').slice(0,fmt===58?14:22)}`,fmtMoney(i.prix*i.qty,dev))),
+    line('='),
+    row('TOTAL TTC',fmtMoney(sale.total,dev)),
+    line('='),
+    center(''),
+    center('Merci pour votre achat !'),
+    center('Digitale Solution POS'),
+    '',''
+  ].filter(x=>x!==undefined).join('\n');
+
+  const parts=[
+    [ESC,0x40],           // Init
+    [ESC,0x74,0x13],      // Charset: Latin-1
+    [ESC,0x61,0x01],      // Center
+    [GS,0x21,fmt===80?0x00:0x00], // Normal size
+    ...enc(txt),
+    [ESC,0x64,0x04],      // Feed 4 lines
+    [ESC,0x69],           // Cut
+  ];
+  const flat=[];
+  parts.forEach(p=>{ if (Array.isArray(p[0])) flat.push(...p.flat()); else flat.push(...p); });
+  return new Uint8Array(flat);
+}
+
+// ════════════════════════════════════════════════════════════════
+// SETTINGS
+// ════════════════════════════════════════════════════════════════
+function loadSettings() {
+  const m=currentCommerce, u=currentUser;
+  if (!m||!u) return;
+  if ($('s-nom'))     $('s-nom').value     = m.nom||'';
+  if ($('s-proprio')) $('s-proprio').value = m.proprio||'';
+  if ($('s-ville'))   $('s-ville').value   = m.ville||'';
+  if ($('s-tel'))     $('s-tel').value     = m.telephone||'';
+  if ($('s-devise'))  $('s-devise').value  = m.devise||'FCFA';
+  if ($('s-welcome')) $('s-welcome').value = m.welcomeMsg||'';
+  if ($('s-wa-msg'))  $('s-wa-msg').value  = m.waMsg||'';
+  if ($('s-role-display')) $('s-role-display').innerHTML=
+    `<strong>${{admin:'👑 Propriétaire/Admin',gerant:'👔 Gérant',caissier:'🧑‍💼 Caissier'}[u.role]||u.role}</strong>`;
+  // FB status
+  const fbs=$('fb-status-card');
+  if (fbs) fbs.innerHTML = FB_READY
+    ? `✅ <strong>Firebase connecté</strong><br/>📦 onSnapshot actif sur produits, ventes, clients, notifications.<br/>💾 Cache offline IndexedDB activé.`
+    : `⚠️ <strong>Firebase non configuré</strong><br/>L'app fonctionne en mode local. Pour le temps réel multi-appareils, configurez Firebase.`;
+}
+window.loadSettings = loadSettings;
+
+async function saveMerchantInfo() {
+  const data={nom:$('s-nom')?.value.trim(),proprio:$('s-proprio')?.value.trim(),
+    ville:$('s-ville')?.value.trim(),telephone:$('s-tel')?.value.trim(),
+    devise:$('s-devise')?.value};
+  try {
+    if (!isDemo()) await updateDoc(doc(db,'commerces',currentCommerce.id),data);
+    Object.assign(currentCommerce,data);
+    initAppUI(); toast('Commerce mis à jour','ok');
+  } catch(e){toast('Erreur','err');}
+}
+window.saveMerchantInfo = saveMerchantInfo;
+
+async function saveWelcome() {
+  const data={welcomeMsg:$('s-welcome')?.value,waMsg:$('s-wa-msg')?.value,devise:$('s-devise')?.value};
+  try {
+    if (!isDemo()) await updateDoc(doc(db,'commerces',currentCommerce.id),data);
+    Object.assign(currentCommerce,data);
+    toast('Paramètres sauvegardés','ok');
+  } catch(e){toast('Erreur','err');}
+}
+window.saveWelcome = saveWelcome;
+
+async function savePin() {
+  const p=$('s-pin-new')?.value, p2=$('s-pin-conf')?.value;
+  if (p.length<4) { toast('PIN de 4 chiffres minimum','err'); return; }
+  if (p!==p2) { toast('Les PIN ne correspondent pas','err'); return; }
+  try {
+    if (!isDemo()) await updateDoc(doc(db,'commerces',currentCommerce.id),{ownerPin:p});
+    currentCommerce.ownerPin=p;
+    toast('PIN enregistré','ok');
+    $('s-pin-new').value=''; $('s-pin-conf').value='';
+  } catch(e){toast('Erreur','err');}
+}
+window.savePin = savePin;
+
+async function confirmReset() {
+  const c=prompt('Tapez CONFIRMER pour supprimer toutes les données :');
+  if (c!=='CONFIRMER') return;
+  if (isDemo()) { _demoInit(); toast('Données démo réinitialisées','ok'); return; }
+  try {
+    const cid=currentCommerce.id;
+    for (const col of ['produits','ventes','clients','notifications']) {
+      const snap=await getDocs(query(collection(db,col),where('commerceId','==',cid)));
+      const batch=writeBatch(db);
+      snap.docs.forEach(d=>batch.delete(d.ref));
+      await batch.commit();
+    }
+    toast('Données réinitialisées','ok');
+  } catch(e){toast('Erreur: '+e.message,'err');}
+}
+window.confirmReset = confirmReset;
+
+// Firebase config modal
+function openFirebaseConfig() {
+  const cfg=getStoredFBConfig()||{};
+  ['apiKey','authDomain','projectId','storageBucket','messagingSenderId','appId'].forEach(k=>{
+    const el=$('fb-'+k.toLowerCase().replace('storagebucket','bucket')
+      .replace('messagingsenderid','senderid').replace('authDomain','authdomain')
+      .replace('projectId','projectid').replace('appId','appid')
+      .replace('apiKey','apikey'));
+    if (el) el.value=cfg[k]&&!cfg[k].startsWith('VOTRE_')?cfg[k]:'';
+  });
+  $('mo-fbcfg')?.classList.remove('hidden');
+}
+window.openFirebaseConfig = openFirebaseConfig;
+
+function saveFBConfig() {
+  const cfg={
+    apiKey:           $('fb-apikey')?.value.trim(),
+    authDomain:       $('fb-authdomain')?.value.trim(),
+    projectId:        $('fb-projectid')?.value.trim(),
+    storageBucket:    $('fb-bucket')?.value.trim(),
+    messagingSenderId:$('fb-senderid')?.value.trim(),
+    appId:            $('fb-appid')?.value.trim()
+  };
+  if (!isFBConfigValid(cfg)) { toast('Config incomplète','err'); return; }
+  localStorage.setItem('ds_fb_config',JSON.stringify(cfg));
+  closeMo('mo-fbcfg');
+  toast('Config sauvegardée — rechargement...','ok',2000);
+  setTimeout(()=>location.reload(),1800);
+}
+window.saveFBConfig = saveFBConfig;
+
+function clearFBConfig() {
+  if (!confirm('Effacer la config Firebase ?')) return;
+  localStorage.removeItem('ds_fb_config'); location.reload();
+}
+window.clearFBConfig = clearFBConfig;
+
+// ════════════════════════════════════════════════════════════════
+// VENTE RAPIDE
+// ════════════════════════════════════════════════════════════════
+function qrK(k) {
+  if (qrInput==='0') qrInput=''; qrInput+=k;
+  const v=parseInt(qrInput||'0');
+  if ($('qr-disp')) $('qr-disp').textContent=v.toLocaleString('fr-FR');
+}
+window.qrK = qrK;
+
+function qrDel() {
+  qrInput=qrInput.slice(0,-1)||'0';
+  if ($('qr-disp')) $('qr-disp').textContent=parseInt(qrInput).toLocaleString('fr-FR');
+}
+window.qrDel = qrDel;
+
+function qrAdd() {
+  const a=parseInt(qrInput||'0'); if (!a) return;
+  qrLines.push({id:uid(),label:'Article '+(qrLines.length+1),prix:a,qty:1});
+  qrInput='0'; if ($('qr-disp')) $('qr-disp').textContent='0';
+  renderQR();
+}
+window.qrAdd = qrAdd;
+
+function qrReset() { qrLines=[]; qrInput='0'; if ($('qr-disp')) $('qr-disp').textContent='0'; renderQR(); }
+window.qrReset = qrReset;
+
+function renderQR() {
+  const dev=getDevise(), tot=qrLines.reduce((s,l)=>s+l.prix,0);
+  if ($('qr-cnt'))   $('qr-cnt').textContent   = qrLines.length;
+  if ($('qr-total')) $('qr-total').textContent = fmtMoney(tot,dev);
+  const list=$('qr-lines'); if (!list) return;
+  list.innerHTML=qrLines.length?qrLines.map(l=>`
+    <div class="ci">
+      <span class="ci-name">${l.label}</span>
+      <span class="ci-price">${fmtMoney(l.prix,dev)}</span>
+      <button class="ci-rm" onclick="qrRmLine('${l.id}')">✕</button>
+    </div>`).join(''):'<p class="empty">Aucun article</p>';
+}
+
+function qrRmLine(id) { qrLines=qrLines.filter(x=>x.id!==id); renderQR(); }
+window.qrRmLine = qrRmLine;
+
+async function qrCheckout() {
+  if (!qrLines.length) { toast('Aucun article','err'); return; }
+  const total=qrLines.reduce((s,l)=>s+l.prix,0);
+  const dev=getDevise();
+  try {
+    const sale={id:'s'+uid(),items:qrLines.map(l=>({...l,nom:l.label})),total,
+      clientNom:'Vente Rapide',statut:'done',date:new Date()};
+    if (!isDemo()) {
+      await addDoc(collection(db,'ventes'),{
+        commerceId:currentCommerce.id, items:sale.items, total,
+        clientNom:'Vente Rapide', statut:'done',
+        date:serverTimestamp(), userId:currentUser.uid, type:'quick'
+      });
+    } else { window._D.sales.unshift(sale); }
+    _currentInvoiceSale=sale;
+    toast(`✅ Vente rapide : ${fmtMoney(total,dev)}`,'ok');
+    openInvoice(sale); qrReset();
+  } catch(e){toast('Erreur','err');}
+}
+window.qrCheckout = qrCheckout;
+
+// ════════════════════════════════════════════════════════════════
+// PIN MODAL
+// ════════════════════════════════════════════════════════════════
+function openPIN() { pinBuf=''; renderPinDots('pin-dots'); $('pin-err').textContent=''; $('mo-pin')?.classList.remove('hidden'); }
+function closePIN() { $('mo-pin')?.classList.add('hidden'); pinBuf=''; pinPending=null; }
+window.closePIN = closePIN;
+
+function pinK(k) {
+  $('pin-err').textContent='';
+  if (k==='del') { pinBuf=pinBuf.slice(0,-1); renderPinDots('pin-dots'); return; }
+  if (pinBuf.length>=4) return;
+  pinBuf+=k; renderPinDots('pin-dots');
+  if (pinBuf.length===4) {
+    setTimeout(()=>{
+      const pin=currentCommerce?.ownerPin||'';
+      if (!pin||pinBuf===pin) {
+        pinUnlocked=true; closePIN();
+        if (pinPending) { goSect(pinPending,true); pinPending=null; }
+        // Auto-lock after 30 min
+        setTimeout(()=>{ pinUnlocked=false; },30*60*1000);
+      } else {
+        pinBuf=''; renderPinDots('pin-dots');
+        if ($('pin-err')) $('pin-err').textContent='❌ PIN incorrect. Réessayez.';
+      }
+    },120);
+  }
+}
+window.pinK = pinK;
+
+function renderPinDots(containerId) {
+  document.querySelectorAll(`#${containerId} .pin-dot`).forEach((d,i)=>{
+    d.classList.toggle('on', i<pinBuf.length||i<devPinBuf.length);
+  });
+  // Separate for dev
+  if (containerId==='pin-dots') {
+    document.querySelectorAll('#pin-dots .pin-dot').forEach((d,i)=>d.classList.toggle('on',i<pinBuf.length));
+  }
+  if (containerId==='dev-pin-dots') {
+    document.querySelectorAll('#dev-pin-dots .pin-dot').forEach((d,i)=>d.classList.toggle('on',i<devPinBuf.length));
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
+// ADMIN DEV PANEL
+// ════════════════════════════════════════════════════════════════
+// Triple-clic sur logo (landing) ou logo (app sidebar)
+function setupLogoTripleClick() {
+  const targets=['logo-trigger','sb-logo-trigger'];
+  targets.forEach(id=>{
+    const el=$(id); if (!el) return;
+    el.addEventListener('click',()=>{
+      _logoClicks++;
+      if (_logoTimer) clearTimeout(_logoTimer);
+      _logoTimer=setTimeout(()=>{ _logoClicks=0; },600);
+      if (_logoClicks>=3) {
+        _logoClicks=0; clearTimeout(_logoTimer);
+        devPinBuf=''; renderPinDots('dev-pin-dots');
+        if ($('dev-pin-err')) $('dev-pin-err').textContent='';
+        const ov=$('dev-pin-overlay');
+        if (ov) ov.style.display='flex';
+      }
+    });
+  });
+}
+
+function closeDevPIN() {
+  devPinBuf=''; renderPinDots('dev-pin-dots');
+  const ov=$('dev-pin-overlay'); if (ov) ov.style.display='none';
+}
+window.closeDevPIN = closeDevPIN;
+
+function devPinK(k) {
+  if ($('dev-pin-err')) $('dev-pin-err').textContent='';
+  if (k==='del') { devPinBuf=devPinBuf.slice(0,-1); renderPinDots('dev-pin-dots'); return; }
+  if (devPinBuf.length>=4) return;
+  devPinBuf+=k; renderPinDots('dev-pin-dots');
+  if (devPinBuf.length===4) {
+    setTimeout(()=>{
+      if (devPinBuf===DEV_PIN) {
+        closeDevPIN();
+        openDevPanel();
+      } else {
+        devPinBuf=''; renderPinDots('dev-pin-dots');
+        if ($('dev-pin-err')) $('dev-pin-err').textContent='❌ PIN incorrect';
+      }
+    },120);
+  }
+}
+window.devPinK = devPinK;
+
+function openDevPanel() {
+  const panel=$('dev-panel'); if (!panel) return;
+  panel.style.display='flex';
+  devLoadCommerces();
+}
+
+function closeDevPanel() {
+  const panel=$('dev-panel'); if (panel) panel.style.display='none';
+}
+window.closeDevPanel = closeDevPanel;
+
+function devTab(name, btn) {
+  document.querySelectorAll('.dev-sect').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.dev-tab').forEach(b=>b.classList.remove('on'));
+  $('dev-'+name)?.classList.add('on');
+  btn?.classList.add('on');
+  if (name==='notifications') {
+    // Populate target selector
+    const sel=$('dev-notif-target'); if (!sel) return;
+    sel.innerHTML='<option value="all">📢 Tous les commerces</option>'+
+      _devCommerces.map(c=>`<option value="${c.id}">${c.nom} (${c.ville||'—'})</option>`).join('');
+  }
+}
+window.devTab = devTab;
+
+async function devLoadCommerces() {
+  if (!FB_READY) {
+    ['dev-recent-body','dev-sub-body','dev-pin-body'].forEach(id=>{
+      if ($(id)) $(id).innerHTML='<tr><td colspan="4" class="empty">Firebase non configuré.</td></tr>';
+    });
+    return;
+  }
+  try {
+    const snap=await getDocs(collection(db,'commerces'));
+    _devCommerces=snap.docs.map(d=>({id:d.id,...d.data()}));
+    devRenderOverview();
+    devRenderSubs();
+    devRenderPins();
+  } catch(e) {
+    toast('Erreur chargement commerces: '+e.message,'err');
+  }
+}
+window.devLoadCommerces = devLoadCommerces;
+
+function devRenderOverview() {
+  const total=_devCommerces.length;
+  const active=_devCommerces.filter(c=>c.abonnement==='active').length;
+  const trial=_devCommerces.filter(c=>c.abonnement==='trial').length;
+  const exp=_devCommerces.filter(c=>c.abonnement==='expired').length;
+  if ($('dev-k-total'))  $('dev-k-total').textContent = total;
+  if ($('dev-k-active')) $('dev-k-active').textContent= active;
+  if ($('dev-k-trial'))  $('dev-k-trial').textContent = trial;
+  if ($('dev-k-exp'))    $('dev-k-exp').textContent   = exp;
+  const body=$('dev-recent-body'); if (!body) return;
+  body.innerHTML=_devCommerces.slice(0,10).map(c=>{
+    const d=c.createdAt?.toDate?c.createdAt.toDate():new Date(c.createdAt||0);
+    const sb={trial:'sub-trial',active:'sub-active',expired:'sub-expired',monthly:'sub-monthly'}[c.abonnement]||'sub-trial';
+    return `<tr>
+      <td><strong>${c.nom}</strong></td>
+      <td>${c.ville||'—'}</td>
+      <td>${d.toLocaleDateString('fr-FR')}</td>
+      <td><span class="sub-badge ${sb}">${c.abonnement||'trial'}</span></td>
+    </tr>`;
+  }).join('')||'<tr><td colspan="4" class="empty">Aucun commerce.</td></tr>';
+}
+
+function devRenderSubs() {
+  const body=$('dev-sub-body'); if (!body) return;
+  body.innerHTML=_devCommerces.map(c=>{
+    const exp=c.trialEnd?.toDate?c.trialEnd.toDate():new Date(c.trialEnd||0);
+    const sb={trial:'sub-trial',active:'sub-active',expired:'sub-expired',monthly:'sub-monthly'}[c.abonnement]||'sub-trial';
+    return `<tr>
+      <td><strong>${c.nom}</strong><br/><small style="color:var(--txt3)">${c.ville||'—'}</small></td>
+      <td><span class="sub-badge ${sb}">${c.abonnement||'trial'}</span></td>
+      <td style="font-size:.78rem;font-family:var(--fm)">${exp.toLocaleDateString('fr-FR')}</td>
+      <td><div class="acts">
+        <button class="tbtn ok" onclick="devSetSub('${c.id}','active','monthly')">✅ Actif/Mensuel</button>
+        <button class="tbtn ok" onclick="devSetSub('${c.id}','active','quarterly')">📅 Trimestriel</button>
+        <button class="tbtn ok" onclick="devSetSub('${c.id}','active','annual')">🏆 Annuel</button>
+        <button class="tbtn d"  onclick="devSetSub('${c.id}','expired','')">🔴 Expirer</button>
+      </div></td>
+    </tr>`;
+  }).join('')||'<tr><td colspan="4" class="empty">Aucun commerce.</td></tr>';
+}
+
+async function devSetSub(cid, status, period) {
+  const durations={monthly:30,quarterly:90,annual:365};
+  const days=durations[period]||30;
+  const expDate=new Date(Date.now()+days*86400000);
+  const data={abonnement:status};
+  if (status==='active') { data.trialEnd=expDate; data.period=period; }
+  try {
+    await updateDoc(doc(db,'commerces',cid),data);
+    const c=_devCommerces.find(x=>x.id===cid);
+    if (c) Object.assign(c,data);
+    devRenderSubs();
+    toast(`Abonnement mis à jour`,'ok');
+  } catch(e){toast('Erreur: '+e.message,'err');}
+}
+window.devSetSub = devSetSub;
+
+function devRenderPins() {
+  const body=$('dev-pin-body'); if (!body) return;
+  body.innerHTML=_devCommerces.map(c=>`<tr>
+    <td><strong>${c.nom}</strong><br/><small style="color:var(--txt3)">${c.ville||'—'}</small></td>
+    <td>${c.ownerPin?`<span class="sbdg s-ok">PIN actif</span>`:`<span class="sbdg s-zero">Aucun PIN</span>`}</td>
+    <td><button class="tbtn d" onclick="devResetPin('${c.id}')">🔄 Réinitialiser</button></td>
+  </tr>`).join('')||'<tr><td colspan="3" class="empty">Aucun commerce.</td></tr>';
+}
+
+async function devResetPin(cid) {
+  if (!confirm('Réinitialiser le PIN de ce commerce ?')) return;
+  try {
+    await updateDoc(doc(db,'commerces',cid),{ownerPin:''});
+    const c=_devCommerces.find(x=>x.id===cid); if (c) c.ownerPin='';
+    devRenderPins(); toast('PIN réinitialisé','ok');
+  } catch(e){toast('Erreur','err');}
+}
+window.devResetPin = devResetPin;
+
+// Type custom notif
+document.getElementById('dev-notif-type')?.addEventListener('change', e=>{
+  const fg=$('dev-notif-custom-fg');
+  if (fg) fg.style.display=e.target.value==='custom'?'flex':'none';
+});
+
+async function devSendNotif() {
+  const target=$('dev-notif-target')?.value;
+  const type=$('dev-notif-type')?.value;
+  const custom=$('dev-notif-custom')?.value.trim();
+  if (!FB_READY) { toast('Firebase requis','err'); return; }
+  const msgs={
+    expiry_7:'⏰ Votre abonnement expire dans 7 jours. Renouvelez pour continuer à utiliser Digitale Solution.',
+    expiry_3:'🔴 URGENT : Votre abonnement expire dans 3 jours ! Renouvelez maintenant.',
+    expiry_0:'🚨 Votre abonnement Digitale Solution a expiré. Contactez-nous pour le renouveler.',
+    custom: custom
+  };
+  const message=msgs[type];
+  if (!message) { toast('Message vide','err'); return; }
+  const targets=target==='all'?_devCommerces:[_devCommerces.find(c=>c.id===target)].filter(Boolean);
+  try {
+    const batch=writeBatch(db);
+    targets.forEach(c=>{
+      const ref=doc(collection(db,'notifications'));
+      batch.set(ref,{
+        commerceId:c.id, type:type, message, lu:false,
+        createdAt:serverTimestamp(), fromAdmin:true
+      });
+    });
+    await batch.commit();
+    toast(`✅ Notification envoyée à ${targets.length} commerce(s)`,'ok');
+  } catch(e){toast('Erreur: '+e.message,'err');}
+}
+window.devSendNotif = devSendNotif;
+
+async function devCheckExpiry() {
+  if (!FB_READY) { toast('Firebase requis','err'); return; }
+  const res=$('dev-expiry-result'); if (res) res.textContent='🔍 Vérification...';
+  let count=0;
+  const now=Date.now();
+  const batch=writeBatch(db);
+  for (const c of _devCommerces) {
+    const exp=c.trialEnd?.toDate?c.trialEnd.toDate():new Date(c.trialEnd||0);
+    const daysLeft=Math.ceil((exp-now)/86400000);
+    let msg=null, type=null;
+    if (c.abonnement==='trial'||c.abonnement==='active') {
+      if (daysLeft<=0) { msg='🚨 Votre abonnement a expiré. Contactez-nous pour le renouveler.'; type='expiry_0'; }
+      else if (daysLeft<=3) { msg=`🔴 URGENT : Votre abonnement expire dans ${daysLeft} jour(s) !`; type='expiry_3'; }
+      else if (daysLeft<=7) { msg=`⏰ Votre abonnement expire dans ${daysLeft} jours. Pensez à renouveler.`; type='expiry_7'; }
+    }
+    if (msg) {
+      const ref=doc(collection(db,'notifications'));
+      batch.set(ref,{commerceId:c.id,type,message:msg,lu:false,createdAt:serverTimestamp(),fromAdmin:true});
+      count++;
+    }
+  }
+  if (count) { await batch.commit(); }
+  if (res) res.innerHTML=`✅ ${count} notification(s) envoyée(s) sur ${_devCommerces.length} commerce(s) vérifiés.`;
+  toast(`${count} notification(s) d'expiration envoyée(s)`,'ok');
+}
+window.devCheckExpiry = devCheckExpiry;
+
+// ════════════════════════════════════════════════════════════════
+// THEME
+// ════════════════════════════════════════════════════════════════
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem('ds_theme',t);
+  document.querySelectorAll('.tp,.tsw-pill').forEach(el=>el.classList.toggle('on',el.dataset.t===t));
+}
+window.setTheme = setTheme;
+setTheme(localStorage.getItem('ds_theme')||'dark');
+
+// ════════════════════════════════════════════════════════════════
+// MODALS HELPERS
+// ════════════════════════════════════════════════════════════════
+function closeMo(id) { $(id)?.classList.add('hidden'); }
+function closeMoOv(e,id) { if (e.target===$(id)) closeMo(id); }
+window.closeMo = closeMo; window.closeMoOv = closeMoOv;
+
+function toggleSidebar() {
+  const sb=$('sidebar'); if (!sb) return;
+  if (window.innerWidth<=768) sb.classList.toggle('mob-open');
+  else sb.classList.toggle('coll');
+}
+window.toggleSidebar = toggleSidebar;
+
+// ════════════════════════════════════════════════════════════════
+// ONLINE / OFFLINE
+// ════════════════════════════════════════════════════════════════
+window.addEventListener('online',  ()=>{ document.body.classList.remove('offline'); toast('✅ Connexion rétablie','ok'); });
+window.addEventListener('offline', ()=>{ document.body.classList.add('offline');    toast('📴 Hors ligne — données locales','warn'); });
+if (!navigator.onLine) document.body.classList.add('offline');
+
+// ════════════════════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', ()=>{
+  setTheme(localStorage.getItem('ds_theme')||'dark');
+  setupLogoTripleClick();
+  if (!FB_READY) updateRTChip('nocfg');
+  // Clavier physique sur modals PIN
+  document.addEventListener('keydown', e=>{
+    const pinOpen = !$('mo-pin')?.classList.contains('hidden');
+    const devOpen = $('dev-pin-overlay')?.style.display==='flex';
+    if (pinOpen) { if(e.key>='0'&&e.key<='9') pinK(e.key); else if(e.key==='Backspace') pinK('del'); else if(e.key==='Escape') closePIN(); }
+    if (devOpen) { if(e.key>='0'&&e.key<='9') devPinK(e.key); else if(e.key==='Backspace') devPinK('del'); else if(e.key==='Escape') closeDevPIN(); }
+  });
+  // Close sidebar on outside click (mobile)
+  document.addEventListener('click', e=>{
+    const sb=$('sidebar');
+    if (sb?.classList.contains('mob-open') && !sb.contains(e.target) && !e.target.closest('.mob-tog')) {
+      sb.classList.remove('mob-open');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
