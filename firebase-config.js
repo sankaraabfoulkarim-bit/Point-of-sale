@@ -12,14 +12,13 @@
 //  6. Coller les règles Firestore (voir GUIDE.md)
 // ══════════════════════════════════════════════════════════════
 
-const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyDSs8eZDYBc7NXaSbfP7RLnTgK3YGciRsc",
-  authDomain: "caisse-pharma.firebaseapp.com",
-  databaseURL: "https://caisse-pharma-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "caisse-pharma",
-  storageBucket: "caisse-pharma.firebasestorage.app",
-  messagingSenderId: "252994480658",
-  appId: "1:252994480658:web:3816ad46eb91fc743f46cb"
+const firebaseConfig = {
+  apiKey: "AIzaSyBrQy4VuncezPeZ6vPTaiTmTWxqTVQm1ZI",
+  authDomain: "commerce-3ae6e.firebaseapp.com",
+  projectId: "commerce-3ae6e",
+  storageBucket: "commerce-3ae6e.firebasestorage.app",
+  messagingSenderId: "946906333487",
+  appId: "1:946906333487:web:d6cd511e80a3a0d0b921da"
 };
 // ── PIN Administrateur Développeur ────────────────────────────
 // Accès : triple-clic sur le logo "DIGITALE SOLUTION"
